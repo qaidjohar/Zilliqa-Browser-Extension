@@ -2,20 +2,84 @@
 <html style="width:357px; height:500px;">
     <head>
         <title>Zilliqa Browser Extension</title>
-        <!--<script src="jquery-3.1.0.min.js"></script>-->
+        <script src="jquery-3.1.0.min.js"></script>
+        <script src="font-awesome.min.css"></script>
         <script src="popup.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body style="width:357px; height:500px;">
-        <div class="topnav">
+        
+        <!--<div class="topnav">
           <a href="#home"><img src="logo.png" alt="logo" height="20px"></a>
           <a href="#"><img src="box.png" alt="logo" height="20px"></a>
-          <a href="#">Account</a>
-          <a href="#">Setting</a>
+          <div class="topnav-right">
+            <a href="#search">Account</a>
+            <a href="#about">Menu</a>
+          </div>
+        </div>-->
+        
+        <div class="navbar">
+          <a href="#home"><img src="logo.png" alt="logo" height="20px"></a>
+          <a href="#"><img src="box.png" alt="logo" height="20px"></a>
+          <div class="nav-right">
+              <div class="dropdown">
+                <button class="dropbtn">Account 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                
+                <div class="dropdown-content">
+                  <a href="#">Account 1</a>
+                  <a href="#">Account 2</a>
+                  <a href="#">Create Account</a>
+                  <a href="#">Import Account</a>
+                </div>
+              </div>
+              
+              <div class="dropdown">
+                <button class="dropbtn">Menu 
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                
+                <div class="dropdown-content">
+                  <a href="#">Info</a>
+                  <a href="#">Settings 2</a>
+                  <a href="#">Logout 3</a>
+                </div>
+              </div>
+          </div> 
         </div>
         
+        
+        
         <div style="padding-left:16px">
-          <h2>Contents to be added</h2>
+          <button id="button1">Section 1</button>
+          <button id="button2">Section 2</button>
+          <button id="button3">Section 3</button>
+          <button id="button4">Section 4</button>
+        </div>
+        <br><br>
+
+        <div id="login">
+            <div id="artiststhumbnail">
+                    <!--image here-->
+                    <img src="logo.png" height="100%" alt="artist" />
+            </div>
+            <h2>ZILLIQA</h2>
+            <input type="text" placeholder="Password"><br>
+            <button class="login-btn">Login</button>
+        </div>
+        <div id="sec1" style="display:none">
+          This is my Section 1.
+          <br>
+          <input type="text" placeholder="Enter Key to Send"><br>
+          <button>Send</button>
+        </div>
+        <div id="sec2" style="display:none">
+          This is my Section 2.
+          <br>
+          <input type="text" placeholder="Enter Key to Receive"><br>
+          <button>Receive</button>
         </div>
     </body>
+    
 </html>
