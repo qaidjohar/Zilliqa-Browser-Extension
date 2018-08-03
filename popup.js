@@ -8,16 +8,27 @@
     }
 }*/
 
+function hideall(){
+    $("#login").hide();
+    $("#restore").hide();
+    $("#sec1").hide();
+    $("#sec2").hide();
+}
+
 $(function(){
     
     $('#button1').click(function(){
         $("#login").show();
         $("#sec1").hide();
         $("#sec2").hide();
-    })
+    });
     $('#button2').click(function(){
         $("#sec1").show();
         $("#sec2").hide();
-    })
+    });
+    $('#login-seed').click(function(){
+        hideall();
+        //$("#restore").show();
+    });
 });
 
