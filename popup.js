@@ -28,7 +28,7 @@ $(function(){
     });
     $('#login-seed').click(function(){
         hideall();
-        //$("#restore").show();
+        $("#restore").show();
     });
 });
 

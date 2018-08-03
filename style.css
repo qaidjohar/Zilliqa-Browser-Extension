@@ -122,13 +122,8 @@ body {
     font-size: 16px;
 }
 
-.login-seed {
-    margin-top: 30px;
-    color:#007A8F; 
-    /*font-size: 36px;*/
-}
 
-.login-seed {
+#login-seed {
      background:none;
      color:#007A8F;
      border:none; 
