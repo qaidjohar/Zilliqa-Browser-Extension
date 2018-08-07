@@ -92,6 +92,11 @@ body {
     text-align: center;
 }
 
+
+.center-align {
+    text-align: center;
+}
+
 #login h2 {
     display : block;
     margin : auto;
@@ -132,5 +137,46 @@ body {
      /*border is optional*/
      cursor: pointer;
      margin-top: 10px;
+}
+
+#restore-header {
+    width:100%;
+    height:50px;
+    overflow:hidden;  
+    background-color:grey;  
+    color: white;
+}
+
+#restore textarea {
+  resize: none;
+  margin-top:20px;
+  text-align: center;
+  padding : 15px;
+  font-size: 14px;
+}
+
+#restore input {
+    display : block;
+    margin : auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 80%;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+#restore button {
+    background-color: #007A8F; 
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px
 }
 

@@ -65,15 +65,22 @@
                     <img src="logo.png" height="100%" alt="artist" />
             </div>
             <h2>ZILLIQA</h2>
-            <input type="text" placeholder="Password"><br>
+            <input type="password" placeholder="Password"><br>
             <button class="login-btn">Login</button><br>
-            <!--<a href="#" class="login-seed">Restore from Seed Phrase</a>-->
             <button id="login-seed">Restore from Seed Phrase</button>
         </div>
         
         
-        <div id="restore"  style="display:none">
-            
+        <div id="restore" class="center-align" style="display:none">
+            <div id="restore-header">
+                    <h2>RESTORE</h2>
+            </div>
+            <br>
+            <textarea rows="7" cols="35" placeholder="Enter your 12 words of secret phrase here"></textarea><br>
+            <input type="password" placeholder="New Password"><br>
+            <input type="password" placeholder="Confirm Password"><br>
+            <button id="restore-cancel">Cancel</button>
+            <button id="restore-ok">OK</button><br>
         </div>
         
         

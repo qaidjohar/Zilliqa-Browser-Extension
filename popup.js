@@ -17,7 +17,7 @@ function hideall(){
 
 $(function(){
     
-    $('#button1').click(function(){
+    /*$('#button1').click(function(){
         $("#login").show();
         $("#sec1").hide();
         $("#sec2").hide();
@@ -25,10 +25,19 @@ $(function(){
     $('#button2').click(function(){
         $("#sec1").show();
         $("#sec2").hide();
-    });
+    });*/
     $('#login-seed').click(function(){
         hideall();
         $("#restore").show();
+    });
+    
+    $('#restore-cancel').click(function(){
+        hideall();
+        $("#login").show();
+    });
+    $('#restore-ok').click(function(){
+        hideall();
+        $("#login").show();
     });
 });
 
