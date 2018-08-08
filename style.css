@@ -10,6 +10,11 @@ body {
   float: right;
 }
 
+/* Kailas: Center aligned section inside the top navigation menu bar */
+.nav-center {
+  float: center;
+}
+
 
 .navbar {
     overflow: hidden;
