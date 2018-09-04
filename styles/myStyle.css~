@@ -1,0 +1,18 @@
+h1{
+	color:yellow;
+}
+.red{
+			background-color:red;
+}
+header{
+	background-color: lightgray;
+	width: 100%;	
+}
+
+footer{
+	background-color: lightgray;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;	
+}

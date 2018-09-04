@@ -1,0 +1,31 @@
+
+.red{
+    background-color:red;
+}
+
+.basictext{
+    
+    font-size: 10pt;
+}
+
+header2{
+	background-color: lightgray;
+	width: 100%;	
+}
+
+.smallbutton{
+    font-size: 10pt;
+    width: 40%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+h1{
+    color:#602a30;
+}
+
+h3{
+    color:#602a30;
+}
+.theme{
+	color:#602a30;
+}

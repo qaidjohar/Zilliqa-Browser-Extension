@@ -41,7 +41,7 @@ body {
     border: none;
     outline: none;
     color: black;
-    padding: 10px 10px;
+    padding: 10px 10px 0px 0px;
     background-color: inherit;
     font-family: inherit;
     margin: 0;
@@ -183,5 +183,54 @@ body {
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px
+}
+
+.account-panel {
+    position: absolute;
+    top: 40px;
+    bottom: 3px;
+    left: 10px;
+    right: 3px;
+}
+
+
+.account-info {
+    text-align: center;
+}
+.account-info h1{
+    font-size: 24px;
+}
+.account-info a{
+    font-size: 14px;
+    margin-top: -10px;
+    padding:5px 30px 5px 30px;
+} 
+.account-info p{
+    font-size: 16px;
+    margin-top: 0px;
+    padding:5px 20px 5px 20px;
+} 
+
+
+#history{
+    height: 260px;
+    overflow: auto;
+}
+
+.table-addr {
+    text-align: left;
+}
+.table-confirm {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 200;
+}
+.table-zil {
+    text-align: right;
+}
+.table-usd {
+    text-align: right;
+    font-size: 14px;
+    font-weight: 200;
 }
 

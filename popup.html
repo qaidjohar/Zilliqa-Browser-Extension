@@ -2,8 +2,9 @@
 <html style="width:357px; height:500px;">
     <head>
         <title>Zilliqa Browser Extension</title>
-        <script src="jquery-3.1.0.min.js"></script>
-        <script src="font-awesome.min.css"></script>
+        <link rel="stylesheet" href="styles/jquery.mobile-1.4.5.min.css">
+        <script src="scripts/jquery.min.js" ></script>
+        <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
         <script src="popup.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
@@ -21,44 +22,23 @@
         <div class="navbar">
           <a href="#home"><img src="logo.png" alt="logo" height="20px"></a>
          <!-- <a href="#"><img src="box.png" alt="logo" height="20px"></a> -->
-          <div class="nav-center">
-			  <div class="dropdown">
-                <button class="dropbtn">Networks 
-                  <i class="fa fa-caret-down"></i>
+          
+		  
+          <div class="nav-right"> 
+              <div class="dropdown">
+                <button class="dropbtn ui-btn ui-shadow ui-icon-recycle ui-btn-icon-notext ui-btn-inline">
                 </button>
-				<div class="dropdown-content">
-					<p>The default network for Zil transactions is Zilliqa Main Net.</p>
+                
+                <div class="dropdown-content">
                   <a href="#">Zilliqa Main Net</a>
                   <a href="#">Zilliqa Test Net</a>
                   <a href="#">localhost 4201</a>
                 </div>
-               </div>
-		  </div><!-- End of the DIV class nav-center -->
-		  
-          <div class="nav-right">
-              <div class="dropdown">
-                <button class="dropbtn">Account 
-                  <i class="fa fa-caret-down"></i>
-                </button>
-                
-                <div class="dropdown-content">
-                  <a href="#">Account 1</a>
-                  <a href="#">Account 2</a>
-                  <a href="#">Create Account</a>
-                  <a href="#">Import Account</a>
-                </div>
               </div>
               
               <div class="dropdown">
-                <button class="dropbtn">Menu 
-                  <i class="fa fa-caret-down"></i>
+                <button class="dropbtn ui-btn ui-shadow ui-icon-power ui-btn-icon-notext ui-btn-inline">
                 </button>
-                
-                <div class="dropdown-content">
-                  <a href="#">Info</a>
-                  <a href="#">Settings 2</a>
-                  <a href="#">Logout 3</a>
-                </div>
               </div>
           </div> 
         </div>
@@ -73,7 +53,7 @@
         </div>
         <br><br>-->
 
-        <div id="login">
+        <div id="login"  style="display:none">
             <div id="icon-thumbnail">
                     <!--image here-->
                     <img src="logo.png" height="100%" alt="artist" />
@@ -96,6 +76,101 @@
             <button id="restore-cancel">Cancel</button>
             <button id="restore-ok">OK</button><br>
         </div>
+        
+        <div id="home" style="display:block" >
+            <div class="account-panel ui-nodisc-icon ui-alt-icon">
+                <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline" style="align:left" data-inline="true" data-iconpos="notext" data-theme="a" data-role="button">Account</a>
+            </div>
+            <div class="account-info">
+                <h1>Account Name</h1>
+                <a href="" class="ui-btn ui-shadow ui-icon-bars ui-btn-inline">0x0380...a17e</a>
+                <p><b>91147 Zils </b>(USD 4124.43)</p>
+            </div>
+            <div data-role="tabs" id="tabs">
+              <div class="tabs-head" data-role="navbar" >
+                <ul>
+                  <li><a href="#history" data-ajax="false" data-icon="clock">History</a></li>
+                  <li><a href="#two" data-ajax="false" data-icon="action">Send</a></li>
+                  <li><a href="#two" data-ajax="false" data-icon="shop">Deposit</a></li>
+                  <li><a href="#two" data-ajax="false" data-icon="info">Stats</a></li>
+                </ul>
+              </div>
+            
+              <div id="history">
+                <div data-role="main" class="ui-content">
+                    <ul data-role="listview">
+                      <li><a href="">
+                          <div>
+                              <table width="100%">
+                                <tr>
+                                    <td class="table-addr">0x03801...9a17e</td>
+                                    <td class="table-zil">9341 Zils</td>
+                                </tr>
+                                <tr>
+                                    <td class="table-confirm">Pending</td>
+                                    <td class="table-usd">USD 403.43</td>
+                                </tr>
+                              </table>
+                              
+                          </div>
+                      </a></li>
+                      <li><a href="">
+                          <div>
+                              <table width="100%">
+                                <tr>
+                                    <td class="table-addr">0x03802...8a27b</td>
+                                    <td class="table-zil">4841 Zils</td>
+                                </tr>
+                                <tr>
+                                    <td class="table-confirm">Confirmed</td>
+                                    <td class="table-usd">USD 219.43</td>
+                                </tr>
+                              </table>
+                              
+                          </div>
+                      </a></li>
+
+                      <!--<li><a href="tryit.asp-filename=tryjqmob_lists_views.html#">List Item</a></li>-->
+                      
+                    </ul>
+                </div>
+              </div>
+              <div id="two">
+                <h1>Second tab contents</h1>
+              </div>
+            </div>
+            
+            <hr />	
+            
+            
+            <div data-role="content">
+                <div align="left">
+                    <div data-role="panel" id="mypanel" data-position="left" data-display="overlay">
+                        
+                        <h3>My Accounts</h3>
+                        <hr>
+                        <button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 1</button>
+                        <button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 2</button>
+                        <hr>
+                        <button class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all">Create Account</button>
+                        <button class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all">Import Account</button>
+                        <hr>
+                        <button class="ui-btn ui-icon-gear ui-btn-icon-left ui-corner-all">Settings</button>                        
+                    </div>
+                    
+                </div>
+            </div>
+            <div data-position="fixed" data-role="footer" align="center">
+                
+            </div>	
+        </div>
+        
+        
+        
+        
+        
+        
+        
         
         
         <div id="sec1" style="display:none">
