@@ -76,12 +76,16 @@ $(function(){
     });
     
     $('#login-btn').click(function(){
-        var login_val = $('#password').val();
-        console.log(login_val);
-        if(login_val == 'zilliqa'){
+		// use the id to select the element.
+		let thePassValue =  $('#password').val();
+        console.log(thePassValue);
+        passPhrase(thePassValue);
+        
+       /* if(resultVal){
             hideall();
             $("#home").show();
         }
+        * */
     });
     
     $('#restore-cancel').click(function(){
