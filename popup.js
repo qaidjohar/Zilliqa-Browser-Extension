@@ -11,8 +11,7 @@
 function hideall(){
     $("#login").hide();
     $("#restore").hide();
-    $("#sec1").hide();
-    $("#sec2").hide();
+    $("#home").hide();
 }
 
 function formattedDate(unixTimeStamp) {
@@ -66,9 +65,23 @@ $(function(){
         $("#sec1").show();
         $("#sec2").hide();
     });*/
+    $('#logout').click(function(){
+        hideall();
+        $("#login").show();
+    });
+    
     $('#login-seed').click(function(){
         hideall();
         $("#restore").show();
+    });
+    
+    $('#login-btn').click(function(){
+        var login_val = $('#password').val();
+        console.log(login_val);
+        if(login_val == 'zilliqa'){
+            hideall();
+            $("#home").show();
+        }
     });
     
     $('#restore-cancel').click(function(){

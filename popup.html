@@ -37,7 +37,7 @@
               </div>
               
               <div class="dropdown">
-                <button class="dropbtn ui-btn ui-shadow ui-icon-power ui-btn-icon-notext ui-btn-inline">
+                <button id="logout" class="dropbtn ui-btn ui-shadow ui-icon-power ui-btn-icon-notext ui-btn-inline">
                 </button>
               </div>
           </div> 
@@ -53,15 +53,18 @@
         </div>
         <br><br>-->
 
-        <div id="login"  style="display:none">
+        <div id="login"  style="display:block">
             <div id="icon-thumbnail">
                     <!--image here-->
                     <img src="logo.png" height="100%" alt="artist" />
             </div>
             <h2>ZILLIQA</h2>
-            <input type="password" placeholder="Password"><br>
-            <button class="login-btn">Login</button><br>
-            <button id="login-seed">Restore from Seed Phrase</button>
+            <div class="pass-input">
+                <input id="password" type="password" placeholder="Password"><br>
+                <!--<button class="login-btn">Login</button><br>-->
+                <button data-role="none" id="login-btn" class="login-btn">Login</button>
+                <button data-role="none" id="login-seed">Restore from Seed Phrase</button>
+            </div>
         </div>
         
         
@@ -70,14 +73,14 @@
                     <h2>RESTORE</h2>
             </div>
             <br>
-            <textarea rows="7" cols="35" placeholder="Enter your 12 words of secret phrase here"></textarea><br>
-            <input type="password" placeholder="New Password"><br>
-            <input type="password" placeholder="Confirm Password"><br>
-            <button id="restore-cancel">Cancel</button>
-            <button id="restore-ok">OK</button><br>
+            <textarea data-role="none" rows="7" cols="35" placeholder="Enter your 12 words of secret phrase here"></textarea><br>
+            <input data-role="none" type="password" placeholder="New Password"><br>
+            <input data-role="none" type="password" placeholder="Confirm Password"><br>
+            <button data-role="none" id="restore-cancel">Cancel</button>
+            <button data-role="none" id="restore-ok">OK</button><br>
         </div>
         
-        <div id="home" style="display:block" >
+        <div id="home" style="display:none" >
             <div class="account-panel ui-nodisc-icon ui-alt-icon">
                 <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline" style="align:left" data-inline="true" data-iconpos="notext" data-theme="a" data-role="button">Account</a>
             </div>
