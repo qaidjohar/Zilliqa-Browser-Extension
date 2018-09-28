@@ -7,6 +7,8 @@
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
         <script src="scripts/jquery.sha1.js" ></script>
         <script src="scripts/myCrypto.js" ></script>
+        <script src="scripts/Laksa.browser.js"></script>
+        <script src="scripts/LaksaWallet.browser.js"></script>
         <script src="popup.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
@@ -199,7 +201,7 @@
                         <button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 1</button>
                         <button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 2</button>
                         <hr>
-                        <button class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all">Create Account</button>
+                        <button id="create-account" class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all">Create Account</button>
                         <button class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all">Import Account</button>
                         <hr>
                         <button class="ui-btn ui-icon-gear ui-btn-icon-left ui-corner-all">Settings</button>                        
@@ -211,7 +213,15 @@
                 
             </div>	
         </div>
+        <!--Closing of Home-->
         
+        <div id="createAccount">
+            <table>
+                <tr><td id="address"></td></tr>
+                <tr><td id="private"></td></tr>
+                <tr><td id="public"></td></tr>
+            </table>
+        </div>
         
         
         

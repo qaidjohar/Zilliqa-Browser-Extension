@@ -50,4 +50,4 @@ manage their identities securely and sign transactions.
 3. Click Load Unpackaged --> Browse the Repo Directory --> Click Open.
 
 Done...Zilliqa Browser Extension Loaded Successfully.
-'''
+```
