@@ -10,7 +10,7 @@ manage their identities securely and sign transactions.
     
 ### Login Screen
 
-![Login](docs/images/ext6.png)
+![Login](docs/images/ext6.png | width=100)
     
 ### Password Reset using Seed Phrase
 
