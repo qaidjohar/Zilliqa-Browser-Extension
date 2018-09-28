@@ -10,7 +10,7 @@ manage their identities securely and sign transactions.
     
 ### Login Screen
 
-![Login](docs/images/ext6.png | width=100)
+![Login](docs/images/ext6.png)
     
 ### Password Reset using Seed Phrase
 
@@ -41,6 +41,15 @@ manage their identities securely and sign transactions.
 - Remove an account
         
 ![Accounts](docs/images/ext2.png)
+
+
+## Installation Steps
+```sh
+Clone Repo: $ git clone https://github.com/qaidjohar/Zilliqa-Browser-Extension
+Open Chrome Web Browser --> Tools --> Extensions
+Click Load Unpackaged --> Browse the Repo Directory --> Click Open.
+Done...Zilliqa Browser Extension Loaded Successfully.
+
     
 
 
