@@ -9,26 +9,26 @@ manage their identities securely and sign transactions.
         -- Under Development
     
     - Login Screen
-    ![Login](docs/images/ext6.png)
+![Login](docs/images/ext6.png)
     
     - Password Reset using Seed Phrase
-    ![Reset](docs/images/ext5.png)
+![Reset](docs/images/ext5.png)
     
     - Home Screen
     
-        ![Home](docs/images/ext1.png)
+![Home](docs/images/ext1.png)
     
         -- Account Details Section
         
         -- History
-        ![History](docs/images/ext4.png)
+![History](docs/images/ext4.png)
         
         -- Send (Under Development)
         
         -- Deposit (Under Development)
         
         -- Stats: Provides updated statictical information about Zilliqa Cryptocurrency.
-        ![Stats](docs/images/ext7.png)
+![Stats](docs/images/ext7.png)
         
         
         
@@ -38,7 +38,7 @@ manage their identities securely and sign transactions.
         -- Create new account
         -- Remove an account
         
-        ![Accounts](docs/images/ext2.png)
+![Accounts](docs/images/ext2.png)
     
 
 
