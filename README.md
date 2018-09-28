@@ -45,11 +45,9 @@ manage their identities securely and sign transactions.
 
 ## Installation Steps
 ```sh
-Clone Repo: $ git clone https://github.com/qaidjohar/Zilliqa-Browser-Extension
-Open Chrome Web Browser --> Tools --> Extensions
-Click Load Unpackaged --> Browse the Repo Directory --> Click Open.
+1. Clone Repo: $ git clone https://github.com/qaidjohar/Zilliqa-Browser-Extension
+2. Open Chrome Web Browser --> Tools --> Extensions
+3. Click Load Unpackaged --> Browse the Repo Directory --> Click Open.
+
 Done...Zilliqa Browser Extension Loaded Successfully.
-
-    
-
-
+'''
