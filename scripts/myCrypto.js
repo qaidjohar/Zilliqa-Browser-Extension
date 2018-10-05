@@ -28,23 +28,19 @@ function passPhrase(thePassValue){
    
     let theStoredPassSHA1;
    
-   //alert('KRP-Value is set to ' + theLoginPassSHA1);  
+   //console.log('Value is set to ' + theLoginPassSHA1);  
 	
 	chrome.storage.sync.get(['extLoginKey'], function(result) {
-        // alert('KRP-Value currently is ' + result.extLoginKey);
+        // console.log('Value currently is ' + result.extLoginKey);
          
          theStoredPassSHA1 = result.extLoginKey; 
-         //alert('theStoredPassSHA1=' + theStoredPassSHA1);
+         //console.log('theStoredPassSHA1=' + theStoredPassSHA1);
          
          // Case 1: default Key doesn't exists
          if (!result.extLoginKey) {
 			 let defPwd =  $.sha1('zilliqa');
 			 chrome.storage.sync.set({extLoginKey: defPwd}, function() {
-				// alert('KRP-Value is set to ' + theLoginPassSHA1);
-				//alert('case 1: KRP-Value is set to ' + defPwd);
-				theStoredPassSHA1 = defPwd;
-				
-				
+				theStoredPassSHA1 = defPwd;				
 				hideall();
 				$("#home").show();
 				
@@ -53,7 +49,7 @@ function passPhrase(thePassValue){
 		 
 		 // Case 2: default key exists : ensure it is correct for development testing
 		 if (theStoredPassSHA1 != theLoginPassSHA1) {
-			 alert('Wrong Seed Phase. Please try again...');			 	 
+			 console.log('Wrong Seed Phase. Please try again...');			 	 
 		 } else{
 			hideall();
 			$("#home").show();
