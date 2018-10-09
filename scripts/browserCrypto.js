@@ -20,6 +20,38 @@ function ajaxCall(){
 });
 }
 
+function loginSetup(){
+    let seedPhrase = $('#newSeedPhrase').val();
+    let newPassword = $('#newPassword').val();
+    let newConfirmPassword = $('#newConfirmPassword').val();
+    
+    if(newPassword != newConfirmPassword){
+        console.log("Password doesn't Match");
+        return;
+    }
+    else{
+        
+        chrome.storage.local.get(['initialSetup'], function(result) {
+            if(!result.initialSetup){
+                chrome.storage.local.set({initialSetup: true}, function() {
+                  console.log("Zilliqa Browser Extension - Password encrypted storage initialized.");
+                  hideall();
+                  $("#login").show();
+                });
+            } else {
+                hideall();
+                $("#login").show();
+                return;
+            }
+        });
+        
+        
+      
+        
+        
+    }
+}
+
 // Store/Retrieve user data in extension
 function passPhrase(thePassValue){
 	// SHA1 encryption algorithm

@@ -11,9 +11,9 @@
 function hideall(){
     $("#login").hide();
     $("#restore").hide();
+    $("#setPass").hide();
     $("#home").hide();
     $("#createAccount").hide();
-    
 }
 
 function formattedDate(unixTimeStamp) {
@@ -47,6 +47,12 @@ $(function(){
         $("#sec1").show();
         $("#sec2").hide();
     });*/
+    $('#setPass-ok').click(function(){
+        //hideall();
+        loginSetup();
+        //$("#login").show();
+    });
+    
     $('#logout').click(function(){
         hideall();
         $("#login").show();

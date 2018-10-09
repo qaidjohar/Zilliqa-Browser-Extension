@@ -65,8 +65,20 @@
           <button id="button4">Section 4</button>
         </div>
         <br><br>-->
+        
+        <div id="setPass" class="center-align" style="display:block">
+            <div id="restore-header">
+                    <h2>Create Password</h2>
+            </div>
+            <br>
+            <textarea id="newSeedPhrase" data-role="none" rows="7" cols="35" placeholder="Enter your 12 words of secret phrase here"></textarea><br>
+            <input id="newPassword" data-role="none" type="password" placeholder="New Password"><br>
+            <input id="newConfirmPassword" data-role="none" type="password" placeholder="Confirm Password"><br>
+            <button data-role="none" id="setPass-clear">Clear</button>
+            <button data-role="none" id="setPass-ok">OK</button><br>
+        </div>
 
-        <div id="login"  style="display:block">
+        <div id="login"  style="display:none">
             <div id="icon-thumbnail">
                     <!--image here-->
                     <img src="logo.png" height="100%" alt="artist" />
@@ -93,7 +105,10 @@
             <button data-role="none" id="restore-ok">OK</button><br>
         </div>
         
-        <div id="home" style="display:none" >
+        
+        
+        
+        <div id="home" style="display:none">
             <div class="account-panel ui-nodisc-icon ui-alt-icon">
                 <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline" style="align:left" data-inline="true" data-iconpos="notext" data-theme="a" data-role="button">Account</a>
             </div>
