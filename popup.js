@@ -80,10 +80,12 @@ $(function(){
         hideall();
         $("#login").show();
     });
+    
     $('#restore-ok').click(function(){
         hideall();
         $("#login").show();
-    });    
+    });  
+      
     $('#zil-stats').click(function(){
        ajaxCall();        
     });
@@ -93,6 +95,6 @@ $(function(){
         $("#createAccount").show();
         createAccount();
     });
-    
+            
 });
 

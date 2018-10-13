@@ -23,7 +23,7 @@ const employeeData = [
          ];
          
  var db;
- var request = window.indexedDB.open("localDatabase", 2);
+ var request = window.indexedDB.open("localDatabase", 1);
         
  request.onerror = function(event) {
 	console.log("error: database can not be opened: ");
@@ -36,10 +36,36 @@ const employeeData = [
 	 
  request.onupgradeneeded = function(event) {
 	var db = event.target.result;
-	var objectStore = db.createObjectStore("employee1", {keyPath: "id"});
+	var objectStore = db.createObjectStore("userAccounts", {keyPath: "address"});
 	
-	for (var i in employeeData) {
+	/*for (var i in employeeData) {
 	   objectStore.add(employeeData[i]);
 	}
 	console.log('onupgradeneeded executed: employee table created');
+	* */
  }
+
+
+function addAccount(addr, accName, pAddr, priAddr) {
+            var request = db.transaction(["userAccounts"], "readwrite")
+            .objectStore("userAccounts")
+            .add({ address: addr, name: accName, publicAddress: pAddr, privateAddress: priAddr });
+            
+            request.onsuccess = function(event) {
+               console.log("Account has been added to your database.");
+            };
+            
+            request.onerror = function(event) {
+               console.log("Unable to add data. It is already exist in your database! ");
+            }
+}
+
+function removeAccount(address) {
+            var request = db.transaction(["userAccounts"], "readwrite")
+            .objectStore("userAccounts")
+            .delete(address);
+            
+            request.onsuccess = function(event) {
+               console.log("Entry has been removed from your database.");
+            };
+}

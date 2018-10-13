@@ -115,4 +115,5 @@ function createAccount(){
     $("#address").html("<b>Address:</b><br>"+newAccount.address);
     $("#public").html("<br><b>Public Key:</b><br>"+newAccount.publicKey);
     $("#private").html("<br><b>Private Key:</b><br>"+newAccount.privateKey);
+    addAccount(newAccount.address, "account1", newAccount.publicKey, newAccount.privateKey)
 }
