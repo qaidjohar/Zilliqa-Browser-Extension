@@ -1,4 +1,3 @@
-//https://www.tutorialspoint.com/html5/html5_indexeddb.htm
 //prefixes of implementation that we want to test
  window.indexedDB = window.indexedDB || window.mozIndexedDB || 
  window.webkitIndexedDB || window.msIndexedDB;
