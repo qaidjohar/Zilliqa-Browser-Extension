@@ -71,7 +71,7 @@ $(function(){
     $('#login-btn').click(function(){
 		// use the id to select the element.
 		let thePassValue =  $('#password').val();
-        console.log(thePassValue);
+       // console.log(thePassValue);
         passPhrase(thePassValue);
         
        /* if(resultVal){

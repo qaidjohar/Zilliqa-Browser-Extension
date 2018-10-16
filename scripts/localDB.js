@@ -14,15 +14,9 @@
     console.log("IndexDB support is available");
  }
 
-const employeeData = [
-            { id: "00-01", name: "gopal", age: 35, email: "gopal@tutorialspoint.com" },
-            { id: "00-02", name: "prasad", age: 32, email: "prasad@tutorialspoint.com" },
-            { id: "00-03", name: "prasad", age: 32, email: "prasad@tutorialspoint.com" },
-            { id: "00-04", name: "prasad", age: 32, email: "prasad@tutorialspoint.com" }
-         ];
          
  var db;
- var request = window.indexedDB.open("localDatabase", 1);
+ var request = window.indexedDB.open("extLocalDatabase", 1);
         
  request.onerror = function(event) {
 	console.log("error: database can not be opened: ");
@@ -45,10 +39,14 @@ const employeeData = [
  }
 
 
-function addAccount(addr, accName, pAddr, priAddr) {
+function addAccount(addr, accName, pAddr, priAddr, extLoginKey) {
+	
+			let encPrivateKey = CryptoJS.AES.encrypt(priAddr, extLoginKey); 
+			//console.log("encryptedPrivateKey: " + encPrivateKey);
+	
             var request = db.transaction(["userAccounts"], "readwrite")
             .objectStore("userAccounts")
-            .add({ address: addr, name: accName, publicAddress: pAddr, privateAddress: priAddr });
+            .add({ address: addr, name: accName, publicAddress: pAddr, privateAddress: encPrivateKey.toString() });
             
             request.onsuccess = function(event) {
                console.log("Account has been added to your database.");
