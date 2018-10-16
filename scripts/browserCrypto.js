@@ -17,7 +17,7 @@ function ajaxCall(){
 		$("#tbl-zilEURmktCap").html("<b> Market Cap:</b> $" + jsondata.data.quotes.EUR.market_cap);
 		$("#tbl-zilEUR1hChng").html("<b> Percent Change in 1Hr:</b> $" + jsondata.data.quotes.EUR.percent_change_1h);
    // alert(jsondata.data.name);
-});
+    });
 }
 
 function passCheck(password){
@@ -33,6 +33,17 @@ function loginSetup(){
     let seedPhrase = $('#newSeedPhrase').val();
     let newPassword = $('#newPassword').val();
     let newConfirmPassword = $('#newConfirmPassword').val();
+    
+    //console.log(seedPhrase.replace(/\s\s+/g, ' '));
+    //Trimming all extra spaces and storing count of words
+    let seedPhraseTrimmed = seedPhrase.replace(/\s\s+/g, ' ');
+    let seedPhraseLen = ($.trim(seedPhraseTrimmed).split(" ")).length;
+    console.log(seedPhraseLen);
+    
+    if(seedPhraseLen != 12){
+       console.log("Phrase is not of 12 words");
+        return; 
+    }
     
     if(!passCheck(newPassword)){
         console.log("Empty Password");
@@ -56,6 +67,11 @@ function loginSetup(){
                 $("#login").show();
             }
         });
+        
+        //let setSeed = $.sha1(seedPhraseTrimmed);
+        chrome.storage.sync.set({extSeedPhrase: seedPhraseTrimmed}, function() {
+            console.log("Seed Phrase Set.");            
+        });  // sync.set function
         
         let setPwd = $.sha1(newPassword);
         chrome.storage.sync.set({extLoginKey: setPwd}, function() {
