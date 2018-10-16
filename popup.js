@@ -16,6 +16,11 @@ function hideall(){
     $("#createAccount").hide();
 }
 
+/*$( "#body" ).load(function() {
+  console.log("Function InitCheck called!!!");
+});*/
+$(window).load(initCheck());
+
 function formattedDate(unixTimeStamp) {
 	//var unixTimeStamp = 983112343;
 	var timestampInMilliSeconds = unixTimeStamp*1000;

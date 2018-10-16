@@ -20,11 +20,24 @@ function ajaxCall(){
 });
 }
 
+function passCheck(password){
+    if(password.length == 0){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
 function loginSetup(){
     let seedPhrase = $('#newSeedPhrase').val();
     let newPassword = $('#newPassword').val();
     let newConfirmPassword = $('#newConfirmPassword').val();
     
+    if(!passCheck(newPassword)){
+        console.log("Empty Password");
+        return;
+    }
     if(newPassword != newConfirmPassword){
         console.log("Password doesn't Match");
         return;
@@ -41,15 +54,27 @@ function loginSetup(){
             } else {
                 hideall();
                 $("#login").show();
-                return;
             }
         });
         
-        
-      
-        
-        
+        let setPwd = $.sha1(newPassword);
+        chrome.storage.sync.set({extLoginKey: setPwd}, function() {
+            console.log("Password Set.");            
+        });  // sync.set function
     }
+}
+
+function initCheck(){
+    console.log("Function InitCheck called!!!");
+    chrome.storage.local.get(['initialSetup'], function(result) {
+        if(result.initialSetup){
+              hideall();
+              $("#login").show();
+        } else {
+            hideall();
+            $("#setPass").show();
+        }
+    });
 }
 
 // Store/Retrieve user data in extension
@@ -70,13 +95,13 @@ function passPhrase(thePassValue){
          
          // Case 1: default Key doesn't exists
          if (!result.extLoginKey) {
-			 let defPwd =  $.sha1('zilliqa');
+			 /*let defPwd =  $.sha1('zilliqa');
 			 chrome.storage.sync.set({extLoginKey: defPwd}, function() {
-				theStoredPassSHA1 = defPwd;				
-				hideall();
-				$("#home").show();
+				theStoredPassSHA1 = defPwd;	*/			
+            hideall();
+            $("#setPass").show();
 				
-			});  // sync.set function
+			/*});  // sync.set function*/
 		 }		
 		 
 		 // Case 2: default key exists : ensure it is correct for development testing
