@@ -1,5 +1,5 @@
 /*function myFunction() {
-    console.log("Function Called");
+    //console.log("Function Called");
     var x = document.getElementById("sec1");
     if (x.style.display === "none") {
         x.style.display = "block";
@@ -17,7 +17,7 @@ function hideall(){
 }
 
 /*$( "#body" ).load(function() {
-  console.log("Function InitCheck called!!!");
+  //console.log("Function InitCheck called!!!");
 });*/
 $(window).load(initCheck());
 
@@ -71,7 +71,7 @@ $(function(){
     $('#login-btn').click(function(){
 		// use the id to select the element.
 		let thePassValue =  $('#password').val();
-       // console.log(thePassValue);
+       // //console.log(thePassValue);
         passPhrase(thePassValue);
         
        /* if(resultVal){
@@ -91,6 +91,11 @@ $(function(){
         $("#login").show();
     });  
       
+    $('#createAccountBack').click(function(){
+        hideall();
+        $("#home").show();
+    });
+      
     $('#zil-stats').click(function(){
        ajaxCall();        
     });
@@ -99,6 +104,13 @@ $(function(){
         hideall();
         $("#createAccount").show();
         createAccount();
+    });
+    
+    $(document).on("click","#accBtn",function(btn){
+        ////console.log(btn);
+        ////console.log("Value = " + btn.target.innerText);
+        loadZilAccount(btn.target.innerText);
+        
     });
             
 });

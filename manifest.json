@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
-    "name": "Zilliqa Browser Extension",
+    "name": "Green Wallet",
     "version": "1.0",
-    "description": "This extension for managing Zilliqa",
+    "description": "The extension provides user interface to work with Zilliqa TestNet",
     "icons": {
         "128": "icon128.png",
         "48": "icon48.png",

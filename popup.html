@@ -7,10 +7,11 @@
         <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
         <script src="scripts/jquery.sha1.js" ></script>
         <script src="scripts/aes.js" ></script>
+        <script src="scripts/Laksa.browser.js"></script>
         <script src="scripts/browserCrypto.js" ></script>
         <script src="scripts/localDB.js" ></script>
-        <script src="scripts/Laksa.browser.js"></script>
-        <script src="scripts/LaksaWallet.browser.js"></script>
+        
+        <!--<script src="scripts/LaksaWallet.browser.js"></script>-->
         <script src="popup.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">       
     </head>
@@ -114,9 +115,9 @@
                 <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline" style="align:left" data-inline="true" data-iconpos="notext" data-theme="a" data-role="button">Account</a>
             </div>
             <div class="account-info">
-                <h1>Account Name</h1>
-                <a href="" class="ui-btn ui-shadow ui-icon-bars ui-btn-inline">0x0380...a17e</a>
-                <p><b>91147 Zils </b>(USD 4124.43)</p>
+                <h1 id='homeAccName'></h1>
+                <a id='homeAddress' href="" class="ui-btn ui-shadow ui-icon-bars ui-btn-inline"></a>
+                <b><p id='homeZilBalance'></p></b>
             </div>
             <div data-role="tabs" id="tabs">
               <div class="tabs-head" data-role="navbar" >
@@ -130,7 +131,7 @@
             
               <div id="history">
                 <div data-role="main" class="ui-content">
-                    <ul data-role="listview">
+                    <!--<ul data-role="listview">
                       <li><a href="">
                           <div>
                               <table width="100%">
@@ -162,9 +163,9 @@
                           </div>
                       </a></li>
 
-                      <!--<li><a href="tryit.asp-filename=tryjqmob_lists_views.html#">List Item</a></li>-->
                       
-                    </ul>
+                      
+                    </ul>-->
                 </div>
               </div>
               <div id="div-stats">  <!--    Stats tab Code will go here --> 
@@ -223,8 +224,9 @@
                         
                         <h3>My Accounts</h3>
                         <hr>
-                        <button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 1</button>
-                        <button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 2</button>
+                        <div id='panelAccountNames'>
+                            <!--<button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 1</button>-->
+                        </div>
                         <hr>
                         <button id="create-account" class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all">Create Account</button>
                         <button class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all">Import Account</button>
@@ -246,6 +248,7 @@
                 <tr><td id="private"></td></tr>
                 <tr><td id="public"></td></tr>
             </table>
+            <button id="createAccountBack" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-corner-all">Back</button>
         </div>
         
         
