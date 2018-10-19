@@ -123,6 +123,11 @@ $(function(){
         $("#home").show();
     });
     
+    $('#importAccountBack').click(function(){
+        hideall();
+        $("#home").show();
+    });
+    
     $(document).on("click","#accBtn",function(btn){
         //console.log(btn);
         //console.log("Value = " + btn.target.innerText);
