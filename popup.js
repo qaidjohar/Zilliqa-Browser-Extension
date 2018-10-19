@@ -93,6 +93,7 @@ $(function(){
     });  
       
     $('#createAccountBack').click(function(){
+        readAllAccounts()
         hideall();
         $("#home").show();
     });
@@ -104,6 +105,10 @@ $(function(){
     $('#create-account').click(function(){
         hideall();
         $("#createAccount").show();
+        //createAccount();
+    });
+    
+    $('#createAccountOk').click(function(){
         createAccount();
     });
     

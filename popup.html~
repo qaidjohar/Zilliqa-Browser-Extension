@@ -16,7 +16,16 @@
         <link rel="stylesheet" type="text/css" href="style.css">       
     </head>
     <body style="width:357px; height:500px;" id="body">
-              
+        
+        <!--<div class="topnav">
+          <a href="#home"><img src="logo.png" alt="logo" height="20px"></a>
+          <a href="#"><img src="box.png" alt="logo" height="20px"></a>
+          <div class="topnav-right">
+            <a href="#search">Account</a>
+            <a href="#about">Menu</a>
+          </div>
+        </div>-->
+        
         <div class="navbar">
           <a href="#home"><img src="logo.png" alt="logo" height="20px"></a>
          <!-- <a href="#"><img src="box.png" alt="logo" height="20px"></a> -->
@@ -34,7 +43,7 @@
                   <a href="#">localhost 4201</a>
 -->
 				<div>
-                  <select>
+                  <select class="dropdown-select">
 					<option value="ZilTestNet">Zilliqa Test Net</option>
 					<option value="ZilMainNet">Zilliqa Main Net</option>				
 					
@@ -49,7 +58,16 @@
           </div> 
         </div>
         
-
+        
+        
+        <!--<div style="padding-left:16px">
+          <button id="button1">Section 1</button>
+          <button id="button2">Section 2</button>
+          <button id="button3">Section 3</button>
+          <button id="button4">Section 4</button>
+        </div>
+        <br><br>-->
+        
         <div id="setPass" class="center-align" style="display:block">
             <div id="restore-header">
                     <h2>Create Password</h2>
@@ -82,9 +100,9 @@
                     <h2>RESTORE</h2>
             </div>
             <br>
-            <textarea data-role="none" rows="7" cols="35" placeholder="Enter your 12 words of secret phrase here"></textarea><br>
-            <input data-role="none" type="password" placeholder="New Password"><br>
-            <input data-role="none" type="password" placeholder="Confirm Password"><br>
+            <textarea id="resetSeedPhrase" data-role="none" rows="7" cols="35" placeholder="Enter your 12 words of secret phrase here"></textarea><br>
+            <input id="resetPassword" data-role="none" type="password" placeholder="New Password"><br>
+            <input id="resetConfirmPassword"data-role="none" type="password" placeholder="Confirm Password"><br>
             <button data-role="none" id="restore-cancel">Cancel</button>
             <button data-role="none" id="restore-ok">OK</button><br>
         </div>
@@ -224,7 +242,8 @@
         </div>
         <!--Closing of Home-->
         
-        <div id="createAccount">
+        <div id="createAccount" class="center-align">
+            <input id="createAccountName" data-role="none" type="text" placeholder="Account Name"><br>
             <table>
                 <tr><td id="address"></td></tr>
                 <tr><td id="private"></td></tr>

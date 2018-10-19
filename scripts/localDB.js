@@ -67,6 +67,43 @@ function removeAccount(address) {
             };
 }
 
+function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
+    
+    let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
+    let request = objectStore.get(addr);
+    request.onerror = function(event) {
+       console.log("Unable to retrieve data from database!");
+    };
+
+    request.onsuccess = function(event) {
+        if(request.result) {
+            $("#homeAccName").html(request.result.name);
+        }
+        else{
+            $("#homeAccName").html('Account');
+        }
+    };
+    
+    // use callback to get the Balance
+    laksa.zil.getBalance({ address: addr }, (err, data) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(data);
+      $("#homeZilBalance").html(data.balance+" Zils");
+    });
+    let accName = readAccount(addr);
+    console.log("Name is");
+    console.log(readAccount(addr));
+    //console.log(accName.name);
+    $("#homeAccName").html('Account');
+    $("#homeAddress").html(addr);
+}
+
+
+function readAccount(address) {
+    
+}
 
 function readAllAccounts() {
     var objectStore = db.transaction("userAccounts").objectStore("userAccounts");
