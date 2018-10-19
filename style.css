@@ -61,6 +61,11 @@ body {
     z-index: 1;
 }
 
+.dropdown-select {
+    padding: -10px;
+    margin: -5px;
+}
+
 .dropdown-content a {
     float: none;
     color: black;
