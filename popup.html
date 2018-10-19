@@ -229,7 +229,7 @@
                         </div>
                         <hr>
                         <button id="create-account" class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all">Create Account</button>
-                        <button class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all">Import Account</button>
+                        <button id="import-account" class="ui-btn ui-icon-arrow-d ui-btn-icon-left ui-corner-all">Import Account</button>
                         <hr>
                         <button class="ui-btn ui-icon-gear ui-btn-icon-left ui-corner-all">Settings</button>                        
                     </div>
@@ -251,7 +251,17 @@
                 <tr><td id="zilPublic"></td></tr>
             </table>
             <button id="createAccountOk" data-inline="true">Create Account</button><br>
-            <button id="createAccountBack" data-inline="true" data-icon="arrow-l" style="display:none">Back</button>
+            <button id="createAccountBack" data-inline="true" data-icon="arrow-l">Back</button>
+        </div>
+        
+        
+        <div id="importAccount" align="center">
+            <input id="importAccountName" data-role="none" type="text" placeholder="Account Name"><br>
+            <input id="importAccountAddress" data-role="none" type="text" placeholder="Account Address"><br>
+            <input id="importAccountPublic" data-role="none" type="text" placeholder="Account Private Key"><br>
+            <input id="importAccountPrivate" data-role="none" type="text" placeholder="Account Public Key"><br>
+
+            <button id="importAccountOk" data-inline="true">Import Account</button><br>
         </div>
         
 

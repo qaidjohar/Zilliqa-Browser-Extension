@@ -320,3 +320,14 @@ body {
     font-size: 18px;
 }
 
+#importAccount input {
+    display : block;
+    margin : auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 90%;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+

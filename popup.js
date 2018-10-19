@@ -14,6 +14,7 @@ function hideall(){
     $("#setPass").hide();
     $("#home").hide();
     $("#createAccount").hide();
+    $("#importAccount").hide();
 }
 
 /*$( "#body" ).load(function() {
@@ -105,11 +106,21 @@ $(function(){
     $('#create-account').click(function(){
         hideall();
         $("#createAccount").show();
-        //createAccount();
     });
     
     $('#createAccountOk').click(function(){
         createAccount();
+    });
+    
+    $('#import-account').click(function(){
+        hideall();
+        $("#importAccount").show();
+    });
+    
+    $('#importAccountOk').click(function(){
+        importAccount();
+        hideall();
+        $("#home").show();
     });
     
     $(document).on("click","#accBtn",function(btn){

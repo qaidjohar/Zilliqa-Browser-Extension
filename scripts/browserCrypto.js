@@ -218,3 +218,12 @@ function createAccount(){
     $("#zilPrivate").html("<br><b>Private Key:</b><br>"+newAccount.privateKey);
     addAccount(newAccount.address, accountName, newAccount.publicKey, newAccount.privateKey, extLoginKey);
 }
+
+function importAccount(){
+    let importAccountName = $('#importAccountName').val();
+    let importAccountAddress = $('#importAccountAddress').val();
+    let importAccountPublic = $('#importAccountPublic').val();
+    let importAccountPrivate = $('#importAccountPrivate').val();
+    addAccount(importAccountAddress, importAccountName, importAccountPublic, importAccountPrivate, extLoginKey);
+    readAllAccounts();
+}
