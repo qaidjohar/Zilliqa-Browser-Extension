@@ -92,41 +92,38 @@ function loginSetup(){
     }
 }
 
-function resetExtPassword(){
-    chrome.storage.sync.get(['extSeedPhrase'], function(result) {
-      console.log('Seed Phrase currently is ' + result.extSeedPhrase);
-      console.log('SHA Seed Phrase currently is ' + $.sha1(result.extSeedPhrase));
-    });
-    
+function resetExtPassword(){    
     let seedPhrase = $('#resetSeedPhrase').val();
     let resetPassword = $('#resetPassword').val();
     let resetConfirmPassword = $('#resetConfirmPassword').val();
-    console.log(seedPhrase);
-    console.log(resetPassword);
-    console.log(resetConfirmPassword);
     
     //Retriveing the HASH of Seed Phrase
     chrome.storage.sync.get(['extSeedPhraseHash'], function(result) {
         console.log('Seed Phrase currently is ' + result.extSeedPhraseHash);
         
+        //Checking of Seed Phrase entered matches with seed phrase hash in DB
         if(result.extSeedPhraseHash != $.sha1(seedPhrase)){
            console.log("Seed Phrase Mismatched");
            return;
         }
-
+        //Check if password not empty
         if(!passCheck(resetPassword)){
             console.log("Empty Password");
             return;
         }
+        //Check if password and confirm password are same
         if(resetPassword != resetConfirmPassword){
             console.log("Password doesn't Match");
             return;
         }
         
+        //setting new password in db
         let setPwd = $.sha1(resetPassword);
         chrome.storage.sync.set({extLoginKey: setPwd}, function() {
 			extLoginKey = newPassword;
-            console.log("Reset Password Set.");            
+            console.log("Reset Password Set."); 
+            hideall();
+            $("#login").show();           
         });  // sync.set function
       
     });
