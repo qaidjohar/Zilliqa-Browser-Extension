@@ -126,7 +126,12 @@ function readAllAccounts() {
               i += 1;
               loadZilAccount(cursor.key);
           }
-          $("#panelAccountNames").append("<button id='accBtn' class='ui-btn ui-icon-user ui-btn-icon-left ui-corner-all'>"+cursor.key+"</button>");
+          let icon = blockies.create({ // All options are optional
+			seed: cursor.value.address, 
+		});
+		//$("#panelAccountNames").append(icon);
+         // $("#panelAccountNames").append("<button id='accBtn' class='ui-btn ui-icon-user ui-btn-icon-left ui-corner-all'>"+cursor.value.name+"</button>");
+          $("#panelAccountNames").append("<button id='accBtn'>"+ cursor.value.name +"</button>");
           
           cursor.continue();
        } else {
