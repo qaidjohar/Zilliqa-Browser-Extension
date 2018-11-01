@@ -1,5 +1,7 @@
-const laksa=new Laksa('https://api-scilla.zilliqa.com');
-laksa.setProvider("https://api-scilla.zilliqa.com");
+//const laksa=new Laksa('https://api-scilla.zilliqa.com');
+//laksa.setProvider("https://api-scilla.zilliqa.com");
+const laksa=new Laksa('https://scilla-test-api.aws.z7a.xyz');
+laksa.setProvider("https://scilla-test-api.aws.z7a.xyz");
 
 var extLoginKey;
 var extAccountArray = {};
@@ -89,6 +91,10 @@ function loginSetup(){
         chrome.storage.sync.set({extSeedPhraseHash: $.sha1(seedPhraseTrimmed)}, function() {
             //console.log("Seed Phrase in Hash Set.");            
         });  // sync.set function
+        
+        //Create an initial account 
+        let initialAccount = laksa.wallet.createAccount();
+        addAccount(initialAccount.address, accountName, initialAccount.publicKey, initialAccount.privateKey, extLoginKey);
     }
 }
 

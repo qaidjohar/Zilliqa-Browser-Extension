@@ -68,7 +68,6 @@ function removeAccount(address) {
 }
 
 function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
-    
     let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
     let request = objectStore.get(addr);
     
@@ -101,7 +100,7 @@ function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
       //console.log(data);
       $("#homeZilBalance").html(data.balance+" Zils");
     });
-    let accName = readAccount(addr);
+    //let accName = readAccount(addr);
     //console.log("Name is");
     //console.log(readAccount(addr));
     ////console.log(accName.name);
@@ -113,20 +112,20 @@ function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
 }
 
 
-function readAccount(address) {
-    
-}
 
 function readAllAccounts() {
     var objectStore = db.transaction("userAccounts").objectStore("userAccounts");
     $("#panelAccountNames").html("");
     objectStore.openCursor().onsuccess = function(event) {
        var cursor = event.target.result;
-       
+       let i=0;
        if (cursor) {
           //console.log("Key " + cursor.key + " is " + cursor.value);
           extAccountArray[cursor.key] = cursor.value;
-          
+          if (i == 0) {
+              i += 1;
+              loadZilAccount(cursor.key);
+          }
           $("#panelAccountNames").append("<button id='accBtn' class='ui-btn ui-icon-user ui-btn-icon-left ui-corner-all'>"+cursor.key+"</button>");
           
           cursor.continue();
@@ -134,4 +133,5 @@ function readAllAccounts() {
           //console.log(extAccountArray);
        }
     };
+    
 }
