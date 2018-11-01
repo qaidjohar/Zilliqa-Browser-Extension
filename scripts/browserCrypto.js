@@ -138,6 +138,8 @@ function initCheck(){
               $("#login").show();
         } else {
             hideall();
+            let mnemonic = bip39.generateMnemonic();
+            $('#newSeedPhrase').html(mnemonic);
             $("#setPass").show();
         }
     });
