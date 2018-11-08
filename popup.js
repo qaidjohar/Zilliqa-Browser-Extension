@@ -131,9 +131,12 @@ $(function(){
     $(document).on("click","#accBtn",function(btn){
         ////console.log(btn);
         ////console.log("Value = " + btn.target.innerText);
-        loadZilAccount(btn.target.innerText);
+        loadZilAccount(btn.target.name);
         
+    });
+    
+    $("#tab-sending").click(function() {
+        sendTabLoader();
     });
             
 });
-

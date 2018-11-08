@@ -131,7 +131,7 @@ function readAllAccounts() {
 		});
 		//$("#panelAccountNames").append(icon);
          // $("#panelAccountNames").append("<button id='accBtn' class='ui-btn ui-icon-user ui-btn-icon-left ui-corner-all'>"+cursor.value.name+"</button>");
-          $("#panelAccountNames").append("<button id='accBtn'>"+ cursor.value.name +"</button>");
+          $("#panelAccountNames").append("<button id='accBtn' name='"+cursor.value.address+"' class='ui-btn ui-corner-all'> <img src="+ icon.toDataURL()+" /> "+ cursor.value.name +"</button>");
           
           cursor.continue();
        } else {

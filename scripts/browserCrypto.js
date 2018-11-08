@@ -1,7 +1,7 @@
 //const laksa=new Laksa('https://api-scilla.zilliqa.com');
 //laksa.setProvider("https://api-scilla.zilliqa.com");
-const laksa=new Laksa('https://scilla-test-api.aws.z7a.xyz');
-laksa.setProvider("https://scilla-test-api.aws.z7a.xyz");
+const laksa=new Laksa('https://dev-test-api.aws.z7a.xyz/');
+laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
 
 var extLoginKey;
 var extAccountArray = {};
@@ -234,4 +234,32 @@ function importAccount(){
     let importAccountPrivate = $('#importAccountPrivate').val();
     addAccount(importAccountAddress, importAccountName, importAccountPublic, importAccountPrivate, extLoginKey);
     readAllAccounts();
+}
+
+
+function sendTabLoader(){
+    console.log(extAccountArray);
+    
+    //Filling accounts into From select box in send tab
+    $('#sendFromSelect').html("");
+    $.each(extAccountArray, function(key, value) {
+        console.log( value.name + " ("+key+")");
+        let icon = blockies.create({ // All options are optional
+			seed: key, 
+		});
+        $('#sendFromSelect')
+         .append($("<option style='background-image:url("+icon.toDataURL()+");'></option>")
+         .attr("value",key)
+         .text(value.name)); 
+    });
+    
+    //Filling accounts into To select box in send tab
+    $('#sendToSelect').html("");
+    $.each(extAccountArray, function(key, value) {
+        console.log( value.name + " ("+key+")");
+        $('#sendToSelect')
+         .append($("<option></option>")
+         .attr("value",key)
+         .text(value.name)); 
+    });
 }

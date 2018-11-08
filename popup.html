@@ -125,9 +125,9 @@
               <div class="tabs-head" data-role="navbar" >
                 <ul>
                   <li><a href="#history" data-ajax="false" data-icon="clock">History</a></li>
-                  <!--<li><a href="#two" data-ajax="false" data-icon="action">Send</a></li>
-                  <li><a href="#two" data-ajax="false" data-icon="shop">Deposit</a></li>-->
-                  <li><a href="#two" data-ajax="false" data-icon="info" id="zil-stats">Stats</a></li>
+                  <li><a id="tab-sending" href="#tab-send" data-ajax="false" data-icon="action">Send</a></li>
+                  <!--<li><a href="#two" data-ajax="false" data-icon="shop">Deposit</a></li>-->
+                  <li><a href="#tab-stats" data-ajax="false" data-icon="info" id="zil-stats">Stats</a></li>
                 </ul>
               </div>
             
@@ -170,7 +170,17 @@
                     </ul>-->
                 </div>
               </div>
-              <div id="div-stats">  <!--    Stats tab Code will go here --> 
+              
+              <div id="tab-send">
+                <label for="sendFromSelect" style="font-size:15px;">From:</label>
+                <select name="sendFromSelect" id="sendFromSelect" data-mini="true"></select>
+                
+                <label for="sendFromSelect" style="font-size:15px;">To:</label>
+                <select name="sendToSelect" id="sendToSelect" data-mini="true"></select>
+              </div>
+              
+              
+              <div id="tab-stats">  <!--    Stats tab Code will go here --> 
 				  <p></p>  <hr />           
                <table width="100%">
 				   <tr>
