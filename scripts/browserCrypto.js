@@ -238,28 +238,64 @@ function importAccount(){
 
 
 function sendTabLoader(){
+    let fromData = []; // create an empty array
+    let toData = []; // create an empty array
+    
     console.log(extAccountArray);
     
     //Filling accounts into From select box in send tab
-    $('#sendFromSelect').html("");
-    $.each(extAccountArray, function(key, value) {
-        console.log( value.name + " ("+key+")");
+    //$('#sendFromSelect').html("");
+    $.each(extAccountArray, function(key, val) {
+        console.log( val.name + " ("+key+")");
         let icon = blockies.create({ // All options are optional
 			seed: key, 
 		});
-        $('#sendFromSelect')
+        fromData.push({
+            text: val.name,
+            value: key,
+            description: key,
+            imageSrc: icon.toDataURL()
+        });
+        
+        
+        /*$('#sendFromSelect')
          .append($("<option style='background-image:url("+icon.toDataURL()+");'></option>")
          .attr("value",key)
-         .text(value.name)); 
+         .text(value.name)); */
+    });
+    $('#sendFromSelect').ddslick({
+        data: fromData,
+        width: 300,
+        height:150,
+        imagePosition: "left",
+        selectText: "From",
+        onSelected: function(data){
+            console.log(data);
+        }
     });
     
     //Filling accounts into To select box in send tab
-    $('#sendToSelect').html("");
-    $.each(extAccountArray, function(key, value) {
-        console.log( value.name + " ("+key+")");
-        $('#sendToSelect')
-         .append($("<option></option>")
-         .attr("value",key)
-         .text(value.name)); 
+    //$('#sendToSelect').html("");
+    $.each(extAccountArray, function(key, val) {
+        let icon = blockies.create({ // All options are optional
+			seed: key, 
+		});
+        toData.push({
+            text: val.name,
+            value: key,
+            description: key,
+            imageSrc: icon.toDataURL()
+        });
     });
+    $('#sendToSelect').ddslick({
+        data: toData,
+        width: 300,
+        height:150,
+        imagePosition: "left",
+        selectText: "To:",
+        onSelected: function(data){
+            console.log(data);
+        }
+    });
+    
 }
