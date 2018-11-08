@@ -292,20 +292,41 @@ body {
 
 
 #history{
-    height: 260px;
+    height: 270px;
     overflow: auto;
 }
 
 #tab-send{
-    height: 260px;
+    height: 270px;
     overflow: auto;
 }
 #tab-send div{
     margin: 10px;
 }
+#tab-send input {
+    display : block;
+    margin : auto;
+    text-align: center;
+    width: 90%;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+#tab-send button {
+    background-color: #007A8F; 
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px
+}
 
 #tab-stats{
-    height: 260px;
+    height: 270px;
     overflow: auto;
 }
 
@@ -325,6 +346,7 @@ body {
     font-size: 14px;
     font-weight: 200;
 }
+
 
 
 
