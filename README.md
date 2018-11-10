@@ -6,7 +6,7 @@ manage their identities securely and sign transactions.
 ## User Interface and Features
 
 ### Setting up the Password and Seed Phrase
--Under Development
+![Setup](docs/images/ext8.png)
     
 ### Login Screen
 
@@ -21,12 +21,11 @@ manage their identities securely and sign transactions.
 ![Home](docs/images/ext1.png)
     
 - Account Details Section
-- History
+- Send
 
-![History](docs/images/ext4.png)
+![Send](docs/images/ext9.png)
         
-- Send (Under Development)
-- Deposit (Under Development)
+- Receive (Under Development)
 - Stats: Provides updated statictical information about Zilliqa Cryptocurrency.
 
 ![Stats](docs/images/ext7.png)
