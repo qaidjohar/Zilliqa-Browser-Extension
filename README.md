@@ -54,5 +54,6 @@ Done...Zilliqa Browser Extension Loaded Successfully.
 ## Install from Chrome Store
 1. Go To: [Green Wallet Chrome Store Link](https://chrome.google.com/webstore/detail/green-wallet/afmpijpoenjincdlhebfccmcmfkdkdjc)
 2. Click Add to Chrome
+
 Done...Zilliqa Browser Extension Loaded Successfully.
 
