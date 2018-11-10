@@ -13,6 +13,7 @@
         <script src="scripts/Laksa.browser.js"></script>
         <script src="scripts/browserCrypto.js" ></script>
         <script src="scripts/localDB.js" ></script>
+        <script src="scripts/jquery.qrcode.min.js"></script>
         
         <!--<script src="scripts/LaksaWallet.browser.js"></script>-->
         <script src="popup.js"></script>
@@ -127,7 +128,7 @@
                 <ul>
                   <li><a href="#history" data-ajax="false" data-icon="clock">History</a></li>
                   <li><a id="tab-sending" href="#tab-send" data-ajax="false" data-icon="action">Send</a></li>
-                  <!--<li><a href="#two" data-ajax="false" data-icon="shop">Deposit</a></li>-->
+                  <li><a id="tab-receive" href="#div-receive" data-ajax="false" data-icon="shop">Receive</a></li>
                   <li><a href="#tab-stats" data-ajax="false" data-icon="info" id="zil-stats">Stats</a></li>
                 </ul>
               </div>
@@ -188,6 +189,10 @@
                 <select name="sendToSelect" id="sendToSelect" data-mini="true"></select>-->
               </div>
               
+              <div id="div-receive">
+                <div id="selectToQR"></div>
+                <div id="QRGenerator"></div>
+              </div>
               
               <div id="tab-stats">  <!--    Stats tab Code will go here --> 
                <table width="100%">

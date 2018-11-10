@@ -324,6 +324,13 @@ body {
     margin-left: 10px;
     margin-right: 10px
 }
+#div-receive{
+    height: 270px;
+    overflow: auto;
+}
+#div-receive div{
+    margin: 10px;
+}
 
 #tab-stats{
     height: 270px;

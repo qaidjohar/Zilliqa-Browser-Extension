@@ -139,4 +139,8 @@ $(function(){
         sendTabLoader();
     });
             
+    $("#tab-receive").click(function() {
+        receiveTabLoader();
+    });
+            
 });

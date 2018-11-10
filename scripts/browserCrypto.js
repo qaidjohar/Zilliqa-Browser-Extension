@@ -238,10 +238,8 @@ function importAccount(){
 
 
 function sendTabLoader(){
-    let fromData = []; // create an empty array
-    let toData = []; // create an empty array
-    
-    console.log(extAccountArray);
+    let fromData = []; // create an empty array    
+    //console.log(extAccountArray);
     
     //Filling accounts into From select box in send tab
     //$('#sendFromSelect').html("");
@@ -256,12 +254,6 @@ function sendTabLoader(){
             description: key,
             imageSrc: icon.toDataURL()
         });
-        
-        
-        /*$('#sendFromSelect')
-         .append($("<option style='background-image:url("+icon.toDataURL()+");'></option>")
-         .attr("value",key)
-         .text(value.name)); */
     });
     $('#sendFromSelect').ddslick({
         data: fromData,
@@ -274,27 +266,38 @@ function sendTabLoader(){
         }
     });
     
-    //Filling accounts into To select box in send tab
-    //$('#sendToSelect').html("");
+}
+
+function receiveTabLoader(){
+    let selectData = []; // create an empty array    
+    //console.log(extAccountArray);
+    
+    //Filling accounts into From select box in send tab
+    //$('#sendFromSelect').html("");
     $.each(extAccountArray, function(key, val) {
+        console.log( val.name + " ("+key+")");
         let icon = blockies.create({ // All options are optional
 			seed: key, 
 		});
-        toData.push({
+        selectData.push({
             text: val.name,
             value: key,
             description: key,
             imageSrc: icon.toDataURL()
         });
     });
-    $('#sendToSelect').ddslick({
-        data: toData,
+    $('#selectToQR').ddslick({
+        data: selectData,
         width: 300,
         height:150,
         imagePosition: "left",
-        selectText: "To:",
+        selectText: "Receiver Account",
         onSelected: function(data){
-            console.log(data);
+            console.log(data.selectedData.value);
+            $("#QRGenerator").html("");
+            jQuery(function(){
+                jQuery('#QRGenerator').qrcode(data.selectedData.value);
+            });
         }
     });
     
