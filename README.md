@@ -42,7 +42,7 @@ manage their identities securely and sign transactions.
 ![Accounts](docs/images/ext2.png)
 
 
-## Installation Steps
+## Manual Installation Steps
 ```sh
 1. Clone Repo: $ git clone https://github.com/qaidjohar/Zilliqa-Browser-Extension
 2. Open Chrome Web Browser --> Tools --> Extensions
@@ -50,3 +50,9 @@ manage their identities securely and sign transactions.
 
 Done...Zilliqa Browser Extension Loaded Successfully.
 ```
+
+## Install from Chrome Store
+1. Go To: [Green Wallet Chrome Store Link](https://chrome.google.com/webstore/detail/green-wallet/afmpijpoenjincdlhebfccmcmfkdkdjc)
+2. Click Add to Chrome
+Done...Zilliqa Browser Extension Loaded Successfully.
+
