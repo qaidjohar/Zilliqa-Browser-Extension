@@ -26,7 +26,7 @@ manage their identities securely and sign transactions.
 ![Send](docs/images/ext9.png)
         
 - Receive
-![Send](docs/images/ext10.png)
+![Receive](docs/images/ext10.png)
 
 - Stats: Provides updated statictical information about Zilliqa Cryptocurrency.
 
