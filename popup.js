@@ -7,6 +7,11 @@
         x.style.display = "none";
     }
 }*/
+/*var str = '087D1996982063B65C50687DA7874BD70A79F5F3';
+var s1 = str.slice(0,4);
+var s2 = str.slice(-4,-1)+str.slice(-1);
+console.log(s1+'...'+s2); //=> '12345678'
+*/
 
 function hideall(){
     $("#login").hide();
