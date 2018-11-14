@@ -272,6 +272,35 @@ body {
     right: 3px;
 }
 
+.home-account-container {
+    margin: 0px;
+    margin-top:30px;  
+    border: 1px solid #333;
+    overflow: auto;
+    background: none;
+    border: none;
+}
+.home-account-identicon {
+    float: left;
+}
+.home-account-identicon img {
+    margin-left: 10px;
+    display: block;
+    width: 50px;
+}
+.home-account-content {
+    margin-left: 75px;
+}
+.home-account-name {
+    margin:0px;
+    font-weight: bold;
+    text-align:left;
+}
+.home-account-container p {
+    margin:0px;
+    text-align:left;
+    font-size:11px;
+}
 
 .account-info {
     text-align: center;
@@ -324,12 +353,31 @@ body {
     margin-left: 10px;
     margin-right: 10px
 }
-#div-receive{
+#receive-div{
     height: 270px;
-    overflow: auto;
+    /*overflow: auto;*/
 }
-#div-receive div{
+#receive-div div{
     margin: 10px;
+}
+#receive-QRGenerator{
+    text-align:center;
+}
+#receiveAddr{
+    text-align:center;
+    margin:0px;
+    padding:0px;
+}
+#receive-addrDisp{
+    text-align:center;
+    font-size:12px;
+    background:white;
+    padding-left :-10px;
+    margin:0px;
+    padding:0px;
+}
+#receive-addrDisp:hover{
+    background-color: #D0D0D0;
 }
 
 #tab-stats{
@@ -354,7 +402,10 @@ body {
     font-weight: 200;
 }
 
-
+#panelAccountNames{
+    height: 220px;
+    overflow: auto;
+}
 
 
 #createAccount input {

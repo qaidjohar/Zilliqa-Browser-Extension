@@ -147,5 +147,9 @@ $(function(){
     $("#tab-receive").click(function() {
         receiveTabLoader();
     });
+    
+    $("#receive-addrDisp").click(function() {
+        copyToClipboard('#receive-addrDisp');
+    });
             
 });

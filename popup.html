@@ -118,22 +118,34 @@
             <div class="account-panel ui-nodisc-icon ui-alt-icon">
                 <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline" style="align:left" data-inline="true" data-iconpos="notext" data-theme="a" data-role="button">Account</a>
             </div>
+            
+            
+            <div class="home-account-container ui-btn">                
+                <div id='homeAccIdenticon' class="home-account-identicon"><img src="" /></div>
+                <div class="home-account-content">
+                    <h2 id='homeAccName' class="home-account-name"></h2>
+                    <p id='homeAddress'></p>
+               </div>
+            </div>
             <div class="account-info">
-                <h1 id='homeAccName'></h1>
-                <a id='homeAddress' href="" class="ui-btn ui-shadow ui-icon-bars ui-btn-inline"></a>
+                <!--<h1 id='homeAccName'></h1>
+                <a id='homeAddress' href="" class="ui-btn ui-shadow ui-icon-bars ui-btn-inline"></a>-->
                 <b><p id='homeZilBalance'></p></b>
             </div>
+            
+            
             <div data-role="tabs" id="tabs">
               <div class="tabs-head" data-role="navbar" >
                 <ul>
                   <li><a href="#history" data-ajax="false" data-icon="clock">History</a></li>
                   <li><a id="tab-sending" href="#tab-send" data-ajax="false" data-icon="action">Send</a></li>
-                  <li><a id="tab-receive" href="#div-receive" data-ajax="false" data-icon="shop">Receive</a></li>
+                  <li><a id="tab-receive" href="#receive-div" data-ajax="false" data-icon="shop">Receive</a></li>
                   <li><a href="#tab-stats" data-ajax="false" data-icon="info" id="zil-stats">Stats</a></li>
                 </ul>
               </div>
             
               <div id="history">
+                                  
                 <div data-role="main" class="ui-content">
                     <!--<ul data-role="listview">
                       <li><a href="">
@@ -189,9 +201,13 @@
                 <select name="sendToSelect" id="sendToSelect" data-mini="true"></select>-->
               </div>
               
-              <div id="div-receive">
-                <div id="selectToQR"></div>
-                <div id="QRGenerator"></div>
+              <div id="receive-div">
+                <div id="receive-selectToQR"></div>
+                <div id="receive-QRGenerator"></div>
+                <!--<div id="receiveAddr" title = "Click to Copy Address"><span id="receive-addrDisp" ></span></div>-->
+                <div id="receiveAddr">
+                    <button id="receive-addrDisp" class="ui-btn ui-btn-inline" title = "Click to Copy Address"></button>
+                </div>
               </div>
               
               <div id="tab-stats">  <!--    Stats tab Code will go here --> 

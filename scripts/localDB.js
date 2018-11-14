@@ -83,12 +83,12 @@ function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
     request.onsuccess = function(event) {
         if(request.result) {
             $("#homeAccName").html(request.result.name);
-            $("#homeAccName").append("&nbsp;&nbsp;&nbsp;&nbsp;");
-            $("#homeAccName").append(icon);
+            //$("#homeAccName").append("&nbsp;&nbsp;&nbsp;&nbsp;");
+            $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
         }
         else{
             $("#homeAccName").html('Account');
-            $("#homeAccName").append(icon);
+            $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
         }
     };
     

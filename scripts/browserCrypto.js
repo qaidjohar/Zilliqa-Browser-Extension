@@ -6,6 +6,14 @@ laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
 var extLoginKey;
 var extAccountArray = {};
 
+function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
 function zilStats(){
 	$.getJSON('https://api.coinmarketcap.com/v2/ticker/2469/?convert=EUR', function(jsondata) {
 		var zilTime = formattedDate(jsondata.data.last_updated);
@@ -262,7 +270,7 @@ function sendTabLoader(){
         imagePosition: "left",
         selectText: "From",
         onSelected: function(data){
-            console.log(data);
+            loadZilAccount(data.selectedData.value);
         }
     });
     
@@ -286,7 +294,7 @@ function receiveTabLoader(){
             imageSrc: icon.toDataURL()
         });
     });
-    $('#selectToQR').ddslick({
+    $('#receive-selectToQR').ddslick({
         data: selectData,
         width: 300,
         height:150,
@@ -294,10 +302,11 @@ function receiveTabLoader(){
         selectText: "Receiver Account",
         onSelected: function(data){
             console.log(data.selectedData.value);
-            $("#QRGenerator").html("");
+            $("#receive-QRGenerator").html("");
             jQuery(function(){
-                jQuery('#QRGenerator').qrcode(data.selectedData.value);
+                jQuery('#receive-QRGenerator').qrcode({width: 140,height: 140,text: data.selectedData.value});
             });
+            $('#receive-addrDisp').html(data.selectedData.value);
         }
     });
     
