@@ -424,3 +424,19 @@ body {
     font-size: 18px;
 }
 
+/*.ui-popup-container {
+    max-width: 95% !important;
+    top: auto !important;
+    bottom: 5px !important;
+    left: 5 !important;
+}*/
+
+#popupMessage{
+    font-size:14px;
+    text-align:center;
+    padding:5px 10px;
+    background-color: #FFECEC;
+    color:#910000;
+    border-radius: 20px;
+}
+

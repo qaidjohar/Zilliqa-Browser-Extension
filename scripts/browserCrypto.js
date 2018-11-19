@@ -15,6 +15,12 @@ function copyToClipboard(element) {
   $temp.remove();
 }
 
+function displayErrorPopups(message){
+    $("#popupMessage").html(message);
+    $( "#popupMessage" ).popup( "open");
+    setTimeout( function(){ $( "#popupMessage" ).popup( "close" ); }, 5000 );	 	 
+}
+
 function zilStats(){
 	$.getJSON('https://api.coinmarketcap.com/v2/ticker/2469/?convert=EUR', function(jsondata) {
 		var zilTime = formattedDate(jsondata.data.last_updated);
@@ -37,8 +43,8 @@ function zilStats(){
     });
 }
 
-function passCheck(password){
-    if(password.length == 0){
+function emptyInputCheck(word){
+    if(word.length == 0){
         return false;
     }
     else{
@@ -62,7 +68,7 @@ function loginSetup(){
         return; 
     }
     
-    if(!passCheck(newPassword)){
+    if(!emptyInputCheck(newPassword)){
         //console.log("Empty Password");
         return;
     }
@@ -122,7 +128,7 @@ function resetExtPassword(){
            return;
         }
         //Check if password not empty
-        if(!passCheck(resetPassword)){
+        if(!emptyInputCheck(resetPassword)){
             //console.log("Empty Password");
             return;
         }
@@ -153,6 +159,7 @@ function initCheck(){
                 $("#login").show();
             } else {
                 hideall();
+                extLoginKey = background.extLoginKey;
                 $("#home").show();
                 readAllAccounts();
                 loadZilAccount();
@@ -182,7 +189,8 @@ function loginAuth(){
 		 
 		 // Case 2: default key exists : ensure it is correct for development testing
 		 if (theStoredPassSHA1 != theLoginPassSHA1) {
-			 //console.log('Wrong Seed Phase. Please try again...');			 	 
+			 //console.log('Wrong Seed Phase. Please try again...');	
+             displayErrorPopups("Invalid Password!")	
 		 } else{
 			extLoginKey = password;
             background.extLoginKey = password;

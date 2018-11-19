@@ -49,19 +49,12 @@ function formattedDate(unixTimeStamp) {
 	return(formattedDate);
 }
 
+//$("#popupMessage").delay(5000).fade();
+//$("#popupMessage").show().delay(5000).fadeOut();
 
 
 $(function(){
-    
-    /*$('#button1').click(function(){
-        $("#login").show();
-        $("#sec1").hide();
-        $("#sec2").hide();
-    });
-    $('#button2').click(function(){
-        $("#sec1").show();
-        $("#sec2").hide();
-    });*/
+
     $('#setPass-ok').click(function(){
         //hideall();
         loginSetup();
@@ -80,7 +73,6 @@ $(function(){
     
     $('#login-btn').click(function(){
         loginAuth();
-
     });
     
     $('#restore-cancel').click(function(){
@@ -90,8 +82,6 @@ $(function(){
     
     $('#restore-ok').click(function(){
         resetExtPassword();
-        //hideall();
-        //$("#login").show();
     });  
       
     $('#createAccountBack').click(function(){
@@ -130,8 +120,6 @@ $(function(){
     });
     
     $(document).on("click","#accBtn",function(btn){
-        ////console.log(btn);
-        ////console.log("Value = " + btn.target.innerText);
         loadZilAccount(btn.target.name);
         
     });

@@ -123,7 +123,44 @@ function getAllDBAccounts(){
           console.log("Getting Values");
           console.log(result.userAccounts);
           extAccountData = result.userAccounts;
+          deleteAccount(7);
     });
+}
+
+function addNewAccount(accountName){
+    let newAccount = laksa.wallet.createAccount();
+    extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
+    console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
+    console.log(extAccountData);
+    chrome.storage.local.set({userAccounts: extAccountData}, function() {
+          console.log('Value is set to ');
+          console.log(extAccountData);
+    });
+}
+
+function deleteAccount(index){
+    if (index > -1) {
+      extAccountData.splice(index, 1);
+      console.log(index);
+    }
+    else{
+        console.log("No such index");
+    }
+    console.log(extAccountData);
+    chrome.storage.local.set({userAccounts: extAccountData}, function() {
+          console.log('Value is set to ');
+          console.log(extAccountData);
+    });
+}
+
+function getAccountIndex(accAddress){
+    let index = extAccountData.map(function (account) { return account.address; }).indexOf(accAddress);
+    //console.log(index);
+    return index;
+}
+
+function getAccountAddress(accIndex){
+    return extAccountData[accIndex].address;
 }
 
 //Storage key "userAccounts" in namespace "local" changed. Old value was "Array(6)", new value is "Array(7)".
@@ -154,9 +191,8 @@ function readAllDBAccounts(){
             cursor.continue();
         } else {
           console.log(extAccountData);
-          accountSelector('0');
-          setAllDBAccounts();
-          getAllDBAccounts();
+          //addNewAccount("My New Account");
+          //deleteAccount(7);
         }
     };
 }
@@ -183,7 +219,6 @@ function readAllAccounts() {
           cursor.continue();
        } else {
           console.log("Reading Ended");
-          readAllDBAccounts();
        }
     };
 }
