@@ -120,70 +120,34 @@
             </div>
             
             
-            <div class="home-account-container ui-btn">                
+            <div class="home-account-container">                
                 <div id='homeAccIdenticon' class="home-account-identicon"><img src="" /></div>
                 <div class="home-account-content">
                     <h2 id='homeAccName' class="home-account-name"></h2>
-                    <p id='homeAddress'></p>
+                    <div id='homeAddress' class="ui-btn ui-btn-inline"></div>
                </div>
+               <b><p id='homeZilBalance'>Connecting...</p></b>
             </div>
             <div class="account-info">
-                <!--<h1 id='homeAccName'></h1>
-                <a id='homeAddress' href="" class="ui-btn ui-shadow ui-icon-bars ui-btn-inline"></a>-->
-                <b><p id='homeZilBalance'></p></b>
+                
             </div>
             
             
             <div data-role="tabs" id="tabs">
               <div class="tabs-head" data-role="navbar" >
                 <ul>
-                  <li><a href="#history" data-ajax="false" data-icon="clock">History</a></li>
+                  <li><a id="tab-accounts" href="#div-accounts" data-ajax="false" data-icon="clock">Accounts</a></li>
                   <li><a id="tab-sending" href="#tab-send" data-ajax="false" data-icon="action">Send</a></li>
                   <li><a id="tab-receive" href="#receive-div" data-ajax="false" data-icon="shop">Receive</a></li>
                   <li><a href="#tab-stats" data-ajax="false" data-icon="info" id="zil-stats">Stats</a></li>
                 </ul>
               </div>
-            
-              <div id="history">
-                                  
-                <div data-role="main" class="ui-content">
-                    <!--<ul data-role="listview">
-                      <li><a href="">
-                          <div>
-                              <table width="100%">
-                                <tr>
-                                    <td class="table-addr">0x03801...9a17e</td>
-                                    <td class="table-zil">9341 Zils</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-confirm">Pending</td>
-                                    <td class="table-usd">USD 403.43</td>
-                                </tr>
-                              </table>
-                              
-                          </div>
-                      </a></li>
-                      <li><a href="">
-                          <div>
-                              <table width="100%">
-                                <tr>
-                                    <td class="table-addr">0x03802...8a27b</td>
-                                    <td class="table-zil">4841 Zils</td>
-                                </tr>
-                                <tr>
-                                    <td class="table-confirm">Confirmed</td>
-                                    <td class="table-usd">USD 219.43</td>
-                                </tr>
-                              </table>
-                              
-                          </div>
-                      </a></li>
-
-                      
-                      
-                    </ul>-->
-                </div>
+              
+              <div id="div-accounts">
+                <div id="accountSelect"></div>
+                <button id="accbtnTry">set</button>
               </div>
+            
               
               <div id="tab-send">
                 <!--<label for="sendFromSelect" style="font-size:15px;">From:</label>

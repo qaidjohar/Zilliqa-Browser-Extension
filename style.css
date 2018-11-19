@@ -274,7 +274,8 @@ body {
 
 .home-account-container {
     margin: 0px;
-    margin-top:30px;  
+    margin-top:30px;
+    margin-left: 10px;
     border: 1px solid #333;
     overflow: auto;
     background: none;
@@ -289,35 +290,28 @@ body {
     width: 50px;
 }
 .home-account-content {
-    margin-left: 75px;
+    margin-left: 70px;
 }
 .home-account-name {
     margin:0px;
+    margin-left:10px;
     font-weight: bold;
     text-align:left;
 }
-.home-account-container p {
+#homeAddress {
     margin:0px;
+    padding: 3px;
     text-align:left;
     font-size:11px;
 }
-
-.account-info {
-    text-align: center;
-}
-.account-info h1{
-    font-size: 24px;
-}
-.account-info a{
-    font-size: 14px;
-    margin-top: -10px;
-    padding:5px 30px 5px 30px;
-} 
-.account-info p{
+#homeZilBalance{
+    text-align:center;
     font-size: 16px;
-    margin-top: 0px;
+    margin: 0px;
     padding:5px 20px 5px 20px;
 } 
+
+
 
 
 #history{

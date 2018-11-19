@@ -5,6 +5,7 @@ laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
 
 var extLoginKey;
 var extAccountArray = {};
+var extAccountData = [];
 
 function copyToClipboard(element) {
   var $temp = $("<input>");
@@ -159,46 +160,33 @@ function initCheck(){
     });
 }
 
-// Store/Retrieve user data in extension
-function passPhrase(thePassValue){
-	// SHA1 encryption algorithm
-	let theLoginPassSHA1 = $.sha1(thePassValue);
-	//alert(thePassValue + " = " + theLoginPassSHA1);
-   
+function loginAuth(){
+    let password =  $('#password').val();
+    let theLoginPassSHA1 = $.sha1(password);
     let theStoredPassSHA1;
-   
-   ////console.log('Value is set to ' + theLoginPassSHA1);  
-	
-	chrome.storage.sync.get(['extLoginKey'], function(result) {
-        // //console.log('Value currently is ' + result.extLoginKey);
-         
+    
+    chrome.storage.sync.get(['extLoginKey'], function(result) {         
          theStoredPassSHA1 = result.extLoginKey; 
-         ////console.log('theStoredPassSHA1=' + theStoredPassSHA1);
          
          // Case 1: default Key doesn't exists
          if (!result.extLoginKey) {
-			 /*let defPwd =  $.sha1('zilliqa');
-			 chrome.storage.sync.set({extLoginKey: defPwd}, function() {
-				theStoredPassSHA1 = defPwd;	*/			
             hideall();
             $("#setPass").show();
-				
-			/*});  // sync.set function*/
 		 }		
 		 
 		 // Case 2: default key exists : ensure it is correct for development testing
 		 if (theStoredPassSHA1 != theLoginPassSHA1) {
 			 //console.log('Wrong Seed Phase. Please try again...');			 	 
 		 } else{
-			extLoginKey = thePassValue;
+			extLoginKey = password;
 			hideall();
 			$("#home").show();
             readAllAccounts();
             loadZilAccount();
 		 }
-		 
-     }); // sync.get function
+     }); // sync.get function    
 }
+
 
 function createAccount(){
     let accountName = $('#createAccountName').val();
@@ -311,3 +299,35 @@ function receiveTabLoader(){
     });
     
 }
+
+function accountSelector(selectedVal = '-1'){
+    let selectData = []; // create an empty array    
+    $.each(extAccountData, function(index, val) {
+        console.log( val.name + " ("+index+")");
+        let icon = blockies.create({ // All options are optional
+			seed: val.address, 
+		})
+        selectData.push({
+            text: val.name,
+            value: index,
+            description: val.address,
+            imageSrc: icon.toDataURL()
+        });
+    });
+    console.log(selectData);
+    $('#accountSelect').ddslick({
+        data: selectData,
+        width: 300,
+        height:250,
+        imagePosition: "left",
+        selectText: "Select Account",
+        onSelected: function(data){
+            console.log(data);
+        }
+    });
+    if(selectedVal >= 0 && selectedVal < selectData.length){
+        $('#accountSelect').ddslick('select', {index: selectedVal});
+        console.log(selectedVal);
+    }
+}
+

@@ -12,6 +12,9 @@ var s1 = str.slice(0,4);
 var s2 = str.slice(-4,-1)+str.slice(-1);
 console.log(s1+'...'+s2); //=> '12345678'
 */
+var background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
+background.status = parseInt(background.status)+1;
+console.log(background.status);
 
 function hideall(){
     $("#login").hide();
@@ -75,16 +78,8 @@ $(function(){
     });
     
     $('#login-btn').click(function(){
-		// use the id to select the element.
-		let thePassValue =  $('#password').val();
-       // //console.log(thePassValue);
-        passPhrase(thePassValue);
-        
-       /* if(resultVal){
-            hideall();
-            $("#home").show();
-        }
-        * */
+        loginAuth();
+
     });
     
     $('#restore-cancel').click(function(){
@@ -150,6 +145,9 @@ $(function(){
     
     $("#receive-addrDisp").click(function() {
         copyToClipboard('#receive-addrDisp');
+    });
+    $("#accbtnTry").click(function() {
+        $('#accountSelect').ddslick('select', {index: '0'});
     });
             
 });

@@ -111,10 +111,28 @@ function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
     $("#homeAddress").html(addr);
 }
 
-
+function readAllDBAccounts(){
+    let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
+    extAccountData = [];
+    objectStore.openCursor().onsuccess = function(event) {
+        var cursor = event.target.result;
+        let i=0;
+        if (cursor) {
+            let decPrivateKey = CryptoJS.AES.decrypt(cursor.value.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);; 
+            cursor.value.privateAddress = decPrivateKey;
+            extAccountData.push(
+                cursor.value,
+            );            
+            cursor.continue();
+        } else {
+          console.log(extAccountData);
+          accountSelector('0');
+        }
+    };
+}
 
 function readAllAccounts() {
-    var objectStore = db.transaction("userAccounts").objectStore("userAccounts");
+    let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
     $("#panelAccountNames").html("");
     objectStore.openCursor().onsuccess = function(event) {
        var cursor = event.target.result;
@@ -132,11 +150,10 @@ function readAllAccounts() {
 		//$("#panelAccountNames").append(icon);
          // $("#panelAccountNames").append("<button id='accBtn' class='ui-btn ui-icon-user ui-btn-icon-left ui-corner-all'>"+cursor.value.name+"</button>");
           $("#panelAccountNames").append("<button id='accBtn' name='"+cursor.value.address+"' class='ui-btn ui-corner-all'> <img src="+ icon.toDataURL()+" /> "+ cursor.value.name +"</button>");
-          
           cursor.continue();
        } else {
-          //console.log(extAccountArray);
+          console.log("Reading Ended");
+          readAllDBAccounts();
        }
     };
-    
 }
