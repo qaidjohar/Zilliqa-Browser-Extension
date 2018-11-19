@@ -142,15 +142,21 @@ function resetExtPassword(){
         });  // sync.set function
       
     });
- 
 }
 
 function initCheck(){
     //console.log("Function InitCheck called!!!");
     chrome.storage.local.get(['initialSetup'], function(result) {
         if(result.initialSetup){
-              hideall();
-              $("#login").show();
+            if(background.status == 0){
+                hideall();
+                $("#login").show();
+            } else {
+                hideall();
+                $("#home").show();
+                readAllAccounts();
+                loadZilAccount();
+            }
         } else {
             hideall();
             let mnemonic = bip39.generateMnemonic();
@@ -179,6 +185,8 @@ function loginAuth(){
 			 //console.log('Wrong Seed Phase. Please try again...');			 	 
 		 } else{
 			extLoginKey = password;
+            background.extLoginKey = password;
+            background.status = 1;
 			hideall();
 			$("#home").show();
             readAllAccounts();

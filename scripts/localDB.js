@@ -111,6 +111,34 @@ function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
     $("#homeAddress").html(addr);
 }
 
+function setAllDBAccounts(){
+    chrome.storage.local.set({userAccounts: extAccountData}, function() {
+          console.log('Value is set to ');
+          console.log(extAccountData);
+    });
+}
+
+function getAllDBAccounts(){
+    chrome.storage.local.get(['userAccounts'], function(result) {
+          console.log("Getting Values");
+          console.log(result.userAccounts);
+          extAccountData = result.userAccounts;
+    });
+}
+
+//Storage key "userAccounts" in namespace "local" changed. Old value was "Array(6)", new value is "Array(7)".
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    for (key in changes) {
+      var storageChange = changes[key];
+      console.log('Storage key "%s" in namespace "%s" changed. ' +
+                  'Old value was "%s", new value is "%s".',
+                  key,
+                  namespace,
+                  storageChange.oldValue,
+                  storageChange.newValue);
+    }
+});
+
 function readAllDBAccounts(){
     let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
     extAccountData = [];
@@ -118,8 +146,8 @@ function readAllDBAccounts(){
         var cursor = event.target.result;
         let i=0;
         if (cursor) {
-            let decPrivateKey = CryptoJS.AES.decrypt(cursor.value.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);; 
-            cursor.value.privateAddress = decPrivateKey;
+            //let decPrivateKey = CryptoJS.AES.decrypt(cursor.value.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);; 
+            //cursor.value.privateAddress = decPrivateKey;
             extAccountData.push(
                 cursor.value,
             );            
@@ -127,6 +155,8 @@ function readAllDBAccounts(){
         } else {
           console.log(extAccountData);
           accountSelector('0');
+          setAllDBAccounts();
+          getAllDBAccounts();
         }
     };
 }

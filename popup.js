@@ -13,8 +13,9 @@ var s2 = str.slice(-4,-1)+str.slice(-1);
 console.log(s1+'...'+s2); //=> '12345678'
 */
 var background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
-background.status = parseInt(background.status)+1;
-console.log(background.status);
+background.status = 0;
+//background.status = parseInt(background.status)+1;
+//console.log(background.status);
 
 function hideall(){
     $("#login").hide();
