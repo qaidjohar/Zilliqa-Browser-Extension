@@ -385,6 +385,11 @@ body {
     color:#fff;
     text-shadow: none;
 }
+#importAcPopupDialog-popup{
+    right: 10%;
+    left: 10%;
+    width: 90%;
+}
 
 #tab-send{
     height: 270px;

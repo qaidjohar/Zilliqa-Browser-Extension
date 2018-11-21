@@ -132,10 +132,13 @@ $(function(){
     $("#confirmDelAcBtn").click(function() {
         deleteAccount();
     });
-    
+    $("#confirmImportAccBtn").click(function() {
+        importAccount();
+    });
     $("#createAccountBtn").click(function() {
         createAccount();
     });
+    
     
     
     $("#tab-sending").click(function() {

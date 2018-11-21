@@ -18,6 +18,23 @@ function getAccount(index){
           return extAccountData[index];
 }
 
+function importDBAccount(accountName,privateKey){
+    //Validating Private Key
+    try{
+        let account = laksa.wallet.importAccountFromPrivateKey(privateKey);
+        account.privateKey = CryptoJS.AES.encrypt(account.privateKey, extLoginKey);
+        extAccountData.push({'address': account.address,'name': accountName,'privateAddress': account.privateKey,'publicAddress': account.publicKey});
+        chrome.storage.local.set({userAccounts: extAccountData}, function() {
+          $('#accountSelect').ddslick('destroy');
+          let index = getAccountIndex(account.address)
+          loadAccount(index);
+          accountSelector(index);
+        });
+    } catch(err){ 
+        return '-1'; 
+    }    
+}
+
 function createDBAccount(accountName){
     let newAccount = laksa.wallet.createAccount();
     newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);

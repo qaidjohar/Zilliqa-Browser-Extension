@@ -261,6 +261,27 @@ function createAccount(){
     }, 100 );
 }
 
+function importAccount(){
+    let accName = $('#importAccNameInput').val();
+    $('#importAccNameInput').val('');
+    if(accName.length == 0){
+        setTimeout( function(){ displayErrorPopups("Import Account Name Invalid"); }, 500 );
+        return;
+    }
+    let privatekey = $('#importPrKeyInput').val();
+    $('#importPrKeyInput').val('');
+    if(privatekey.length == 0){
+        setTimeout( function(){ displayErrorPopups("Import Private Key Invalid."); }, 500 );
+        return;
+    }
+    let status = importDBAccount(accName,privatekey)
+    if(status == -1){
+        setTimeout( function(){ displayErrorPopups("Import Private Key Invalid"); }, 500 );
+        return;
+    }
+}
+
+
 /*function createAccount(){
     let accountName = $('#createAccountName').val();
     //console.log(accountName);

@@ -159,7 +159,23 @@
                                 <a id="createAccountBtn" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" data-rel="back">Create</a>
                             </div>
                         </div>
-                    <button id="importAccBtn" class="ui-btn ui-btn-inline accountManagerBtn">Import Account</button>
+                    
+                    <!--Import Account-->
+                    <a href="#importAcPopupDialog" id="importAccBtn" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-inline accountManagerBtn">Import Account</a>
+                    <div data-role="popup" id="importAcPopupDialog" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width:400px;">
+                        <div data-role="header" data-theme="a">
+                        <h1>Import Account</h1>
+                        </div>
+                        <div role="main" class="ui-content">
+                            <label for="text-3">Enter Account Name:</label>
+                            <input type="text" name="text" id="importAccNameInput" placeholder="Account Name" data-theme="a" data-clear-btn="true">
+                            <label for="textarea-1">Private Key:</label>
+                            <textarea id="importPrKeyInput" placeholder="Enter Private Key here..." data-theme="a"></textarea>
+                            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Cancel</a>
+                            <a id="confirmImportAccBtn" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow">Import</a>
+                        </div>
+                    </div>
+                    
                     
                     <!--Delete Account-->
                     <a href="#deleteAcPopupDialog" id="deleteAccBtn" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-inline accountManagerBtn">Delete Account</a>
