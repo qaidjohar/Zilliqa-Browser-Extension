@@ -102,7 +102,7 @@ function getAccountAddress(accIndex){
 }
 
 //Storage key "userAccounts" in namespace "local" changed. Old value was "Array(6)", new value is "Array(7)".
-chrome.storage.onChanged.addListener(function(changes, namespace) {
+/*chrome.storage.onChanged.addListener(function(changes, namespace) {
     for (key in changes) {
       var storageChange = changes[key];
       console.log('Storage key "%s" in namespace "%s" changed. ' +
@@ -112,7 +112,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
                   storageChange.oldValue,
                   storageChange.newValue);
     }
-});
+});*/
 
 function readAllDBAccounts(){
     let objectStore = db.transaction("userAccounts").objectStore("userAccounts");

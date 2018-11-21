@@ -106,7 +106,7 @@
                 <div id='homeAccIdenticon' class="home-account-identicon"><img src="" /></div>
                 <div class="home-account-content">
                     <h2 id='homeAccName' class="home-account-name"></h2>
-                    <div id='homeAddress' class="ui-btn ui-btn-inline"></div>
+                    <div id='homeAddress' class="ui-btn ui-btn-inline" title = "Click to Copy Address"></div>
                </div>
                <b><p id='homeZilBalance'>Connecting...</p></b>
             </div>
@@ -199,12 +199,13 @@
                 <select name="sendFromSelect" id="sendFromSelect" data-mini="true"></select>-->
                 <div id="sendFromSelect"></div>
                 <!--<div id="sendToSelect"></div>-->
-                <div class="center-align">
-                    <input id="sendToAddress" data-role="none" type="text" placeholder="Address to Send"><br>
-                    <input id="sendAmount" data-role="none" type="number" placeholder="Amount to Send"><br>
-                    <input id="sendGasPrice" data-role="none" type="number" placeholder="Gas Price"><br>
-                    <button data-role="none" id="send-cancel">Cancel</button>
-                    <button data-role="none" id="send-ok">OK</button><br>
+                <div class="text-center">
+                    <input class="sendInput" id="sendToAddress" data-role="none" type="text" placeholder="Address to Send"><br>
+                    <input class="sendInput" id="sendAmount" data-role="none" type="number" placeholder="Amount to Send"><br>
+                    <input class="sendInput" id="sendGasPrice" data-role="none" type="number" placeholder="Gas Price"><br>
+                    <input class="sendInput" id="sendGasLimit" data-role="none" type="number" placeholder="Gas Limit"><br>
+                    <!--<button data-role="none" id="send-cancel">Cancel</button>-->
+                    <button id="sendTransaction" data-role="none" id="send-ok">OK</button>
                 </div>
                 <!--<label for="sendFromSelect" style="font-size:15px;">To:</label>
                 <select name="sendToSelect" id="sendToSelect" data-mini="true"></select>-->
@@ -318,6 +319,11 @@
 
         
         <div data-role="popup" id="popupMessage"></div>
+        <div data-role="popup" id="popupUndismissible" class="ui-content" style="max-width:280px" data-dismissible="false">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-left">Close</a>
+            <h4>Transaction Information</h4>
+            <p>I have the <code>data-dismissible</code> attribute set to <code>false</code>. I'm not closeable by clicking outside of me.</p>
+        </div>
     </body>
     
 </html>

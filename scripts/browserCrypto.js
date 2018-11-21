@@ -1,7 +1,13 @@
 //const laksa=new Laksa('https://api-scilla.zilliqa.com');
 //laksa.setProvider("https://api-scilla.zilliqa.com");
-const laksa=new Laksa('https://dev-test-api.aws.z7a.xyz/');
-laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
+//const laksa=new Laksa('https://dev-test-api.aws.z7a.xyz/');
+//laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
+const laksa = new Laksa()
+const nodeProvider = new laksa.Modules.HttpProvider('https://api-scilla.zilliqa.com');
+const scillaProvider = new laksa.Modules.HttpProvider('https://scilla-runner.zilliqa.com');
+laksa.setNodeProvider(nodeProvider);
+laksa.setScillaProvider(scillaProvider);
+
 
 var extLoginKey;
 var extAccountArray = {};
@@ -10,7 +16,7 @@ var dbloaded = 0;
 
 
 function copyToClipboard(element) {
-  var $temp = $("<input>");
+  let $temp = $("<input>");
   $("body").append($temp);
   $temp.val($(element).text()).select();
   document.execCommand("copy");
@@ -28,7 +34,6 @@ function shortAddress(address){
     let s2 = address.slice(-4,-1)+address.slice(-1);
     return (s1+'...'+s2); //=> '12345678'
 }
-
 
 function zilStats(){
 	$.getJSON('https://api.coinmarketcap.com/v2/ticker/2469/?convert=EUR', function(jsondata) {
@@ -281,82 +286,50 @@ function importAccount(){
     }
 }
 
-
-/*function createAccount(){
-    let accountName = $('#createAccountName').val();
-    //console.log(accountName);
-    if(accountName.length == 0){
-        return;
-    }
-    
-    $("#createAccountOk").hide();
-    $("#createAccountBack").show();
-        
-    //console.log(laksa.getProvider());
-    
-    laksa.isConnected((err, data) => {
-      if (err) {
-        //console.log(err);
-      }
-      ////console.log(data);
-    });
-    
-    // use then to get the result
-    laksa.isConnected().then(console.log);
-    
-
-    // now do the createAccount()
-    const newAccount = laksa.wallet.createAccount();
-    
-    // check the account that created
-    //console.log(newAccount);
-    $("#zilAccountName").html("<b>Name:</b><br>"+accountName);
-    $("#zilAddress").html("<b>Address:</b><br>"+newAccount.address);
-    $("#zilPublic").html("<br><b>Public Key:</b><br>"+newAccount.publicKey);
-    $("#zilPrivate").html("<br><b>Private Key:</b><br>"+newAccount.privateKey);
-    addAccount(newAccount.address, accountName, newAccount.publicKey, newAccount.privateKey, extLoginKey);
-}*/
-
-/*function importAccount(){
-    let importAccountName = $('#importAccountName').val();
-    let importAccountAddress = $('#importAccountAddress').val();
-    let importAccountPublic = $('#importAccountPublic').val();
-    let importAccountPrivate = $('#importAccountPrivate').val();
-    addAccount(importAccountAddress, importAccountName, importAccountPublic, importAccountPrivate, extLoginKey);
-    readAllAccounts();
-}*/
-
-
-
 function sendTabLoader(){
-    let fromData = []; // create an empty array    
-    //console.log(extAccountArray);
+    let account = getAccount(background.selectedAccount);
+    $('#sendFromSelect').html("From Account: <b>"+account.name+" ("+shortAddress(account.address)+") </b>");    
+}
+
+function initiateTransaction(){
     
-    //Filling accounts into From select box in send tab
-    //$('#sendFromSelect').html("");
-    $.each(extAccountArray, function(key, val) {
-        console.log( val.name + " ("+key+")");
-        let icon = blockies.create({ // All options are optional
-			seed: key, 
-		});
-        fromData.push({
-            text: val.name,
-            value: key,
-            description: key,
-            imageSrc: icon.toDataURL()
-        });
-    });
-    $('#sendFromSelect').ddslick({
-        data: fromData,
-        width: 300,
-        height:150,
-        imagePosition: "left",
-        selectText: "From",
-        onSelected: function(data){
-            loadZilAccount(data.selectedData.value);
-        }
-    });
+    //$( "#popupUndismissible" ).popup( "open");
+    let sendTo = $('#sendToAddress').val();
+    let amount = $('#sendAmount').val();
+    let gasPrice = $('#sendGasPrice').val();
+    let gasLimit = $('#sendGasLimit').val();
+    if(sendTo.length == 0){ displayErrorPopups("Address to Send is Invalid"); return; }
+    if(amount.length == 0){ displayErrorPopups("Amount to Send is Invalid"); return; }
+    if(gasPrice.length == 0){ displayErrorPopups("Gas Price Invalid"); return; }
+    if(gasLimit.length == 0){ displayErrorPopups("Gas Limit Invalid"); return; }
+    let acDetails = getAccount(background.selectedAccount);
+    let decPrivateKey = CryptoJS.AES.decrypt(acDetails.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);
+    console.log(acDetails);
+    console.log(decPrivateKey);
+    let account = laksa.wallet.importAccountFromPrivateKey(decPrivateKey);
+    console.log(account);
+    if(account == false){ setTimeout( function(){ displayErrorPopups("Unable to fetch Private Key..Reload Extension"); }, 100 ); return; }
     
+    let transaction = new laksa.Modules.Transaction({
+        version: 0,
+        toAddr: sendTo,
+        amount: laksa.util.toBN(1),
+        gasPrice: laksa.util.toBN(1),
+        gasLimit: laksa.util.toBN(10)
+    });
+    console.log(transaction);
+    account.signTransaction(transaction).then(d=>laksa.zil.createTransaction(d)).then(e=>{
+        console.log(e);
+        $('#sendToAddress').val('');
+        $('#sendAmount').val('');
+        $('#sendGasPrice').val('');
+        $('#sendGasLimit').val('');
+        if(e.TranID != undefined)
+            displayErrorPopups("TransID: "+e.TranID);
+        else
+            displayErrorPopups("Error: "+e.Error);
+        return;
+    });
 }
 
 function receiveTabLoader(){

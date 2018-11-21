@@ -88,6 +88,9 @@ $(function(){
         hideall();
         $("#home").show();
     });
+    $('#homeAddress').click(function(){
+        copyToClipboard('#homeAddress');
+    });
       
     $('#zil-stats').click(function(){
        zilStats();        
@@ -143,6 +146,9 @@ $(function(){
     
     $("#tab-sending").click(function() {
         sendTabLoader();
+    });
+    $("#sendTransaction").click(function() {
+        initiateTransaction();
     });
             
     $("#tab-receive").click(function() {
