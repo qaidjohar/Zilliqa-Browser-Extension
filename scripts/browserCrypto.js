@@ -6,6 +6,8 @@ laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
 var extLoginKey;
 var extAccountArray = {};
 var extAccountData = [];
+var dbloaded = 0;
+
 
 function copyToClipboard(element) {
   var $temp = $("<input>");
@@ -18,8 +20,15 @@ function copyToClipboard(element) {
 function displayErrorPopups(message){
     $("#popupMessage").html(message);
     $( "#popupMessage" ).popup( "open");
-    setTimeout( function(){ $( "#popupMessage" ).popup( "close" ); }, 5000 );	 	 
+    setTimeout( function(){ $( "#popupMessage" ).popup( "close" ); }, 3000 );	 	 
 }
+
+function shortAddress(address){
+    let s1 = address.slice(0,4);
+    let s2 = address.slice(-4,-1)+address.slice(-1);
+    return (s1+'...'+s2); //=> '12345678'
+}
+
 
 function zilStats(){
 	$.getJSON('https://api.coinmarketcap.com/v2/ticker/2469/?convert=EUR', function(jsondata) {
@@ -161,8 +170,9 @@ function initCheck(){
                 hideall();
                 extLoginKey = background.extLoginKey;
                 $("#home").show();
-                readAllAccounts();
-                loadZilAccount();
+                getAllDBAccounts();
+                loadAccount(background.selectedAccount);
+                setTimeout(function(){accountSelector(background.selectedAccount);},100);
             }
         } else {
             hideall();
@@ -175,6 +185,7 @@ function initCheck(){
 
 function loginAuth(){
     let password =  $('#password').val();
+    $('#password').val('');
     let theLoginPassSHA1 = $.sha1(password);
     let theStoredPassSHA1;
     
@@ -203,8 +214,54 @@ function loginAuth(){
      }); // sync.get function    
 }
 
+function showPrivateKey(flag){
+    if(flag){
+        let password = $('#prKeyPassInput').val();
+        $('#prKeyPassInput').val('');
+        if(password != extLoginKey){
+            $( "#popupShowPrKey" ).popup( "close" );
+            setTimeout( function(){ displayErrorPopups("Invalid Password"); }, 500 );
+            return;
+        }
+        let acDetails = getAccount(background.selectedAccount);
+        let decPrivateKey = CryptoJS.AES.decrypt(acDetails.privateAddress, password).toString(CryptoJS.enc.Utf8);
+        $("#selectedAccountPrivateKey").html(decPrivateKey);
+        $( "#popupShowPrKey" ).popup( "close" );
+        $("#hidePrKey").show();
+        $("#showPrKeyPopup").hide();
+    } else {
+        $("#selectedAccountPrivateKey").html("******************************************************<br>**********");
+        $("#hidePrKey").hide();
+        $("#showPrKeyPopup").show();
+    }
+}
+
+function deleteAccount(){
+    deleteDBAccount(background.selectedAccount);
+    $('#accountSelect').ddslick('destroy');
+    setTimeout( function(){ 
+         loadAccount(0);
+         accountSelector(0);
+    }, 100 );
+}
 
 function createAccount(){
+    let accName = $('#createAccInput').val();
+    $('#createAccInput').val('');
+    if(accName.length == 0){
+        setTimeout( function(){ displayErrorPopups("Account Name Invalid"); }, 500 );
+        return;
+    }
+    let address = createDBAccount(accName);
+    let index = getAccountIndex(address)
+    $('#accountSelect').ddslick('destroy');
+    setTimeout( function(){ 
+         loadAccount(index);
+         accountSelector(index);
+    }, 100 );
+}
+
+/*function createAccount(){
     let accountName = $('#createAccountName').val();
     //console.log(accountName);
     if(accountName.length == 0){
@@ -237,16 +294,17 @@ function createAccount(){
     $("#zilPublic").html("<br><b>Public Key:</b><br>"+newAccount.publicKey);
     $("#zilPrivate").html("<br><b>Private Key:</b><br>"+newAccount.privateKey);
     addAccount(newAccount.address, accountName, newAccount.publicKey, newAccount.privateKey, extLoginKey);
-}
+}*/
 
-function importAccount(){
+/*function importAccount(){
     let importAccountName = $('#importAccountName').val();
     let importAccountAddress = $('#importAccountAddress').val();
     let importAccountPublic = $('#importAccountPublic').val();
     let importAccountPrivate = $('#importAccountPrivate').val();
     addAccount(importAccountAddress, importAccountName, importAccountPublic, importAccountPrivate, extLoginKey);
     readAllAccounts();
-}
+}*/
+
 
 
 function sendTabLoader(){
@@ -318,6 +376,7 @@ function receiveTabLoader(){
 
 function accountSelector(selectedVal = '-1'){
     let selectData = []; // create an empty array    
+    console.log(extAccountData);
     $.each(extAccountData, function(index, val) {
         console.log( val.name + " ("+index+")");
         let icon = blockies.create({ // All options are optional
@@ -333,16 +392,18 @@ function accountSelector(selectedVal = '-1'){
     console.log(selectData);
     $('#accountSelect').ddslick({
         data: selectData,
-        width: 300,
-        height:250,
+        width: "98%",
+        height:220,
         imagePosition: "left",
+        background: "#fff",
         selectText: "Select Account",
         onSelected: function(data){
-            console.log(data);
+            console.log(data.selectedIndex);
+            loadAccount(data.selectedIndex);
         }
     });
     if(selectedVal >= 0 && selectedVal < selectData.length){
-        $('#accountSelect').ddslick('select', {index: selectedVal});
+        $('#accountSelect').ddslick('select', {index: selectedVal.toString()});
         console.log(selectedVal);
     }
 }

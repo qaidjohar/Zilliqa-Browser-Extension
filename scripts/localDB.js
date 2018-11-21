@@ -1,116 +1,3 @@
-//prefixes of implementation that we want to test
- window.indexedDB = window.indexedDB || window.mozIndexedDB || 
- window.webkitIndexedDB || window.msIndexedDB;
-        
-//prefixes of window.IDB objects
- window.IDBTransaction = window.IDBTransaction || 
- window.webkitIDBTransaction || window.msIDBTransaction;
- window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || 
- window.msIDBKeyRange
-         
- if (!window.indexedDB) {
-    //console.log("Your browser doesn't support a stable version of IndexedDB.")
- } else {
-    //console.log("IndexDB support is available");
- }
-
-         
- var db;
- var request = window.indexedDB.open("extLocalDatabase", 1);
-        
- request.onerror = function(event) {
-	//console.log("error: database can not be opened: ");
-  };
-	 
- request.onsuccess = function(event) {
-	db = request.result;
-	//console.log("database open success: " + db);
- };
-	 
- request.onupgradeneeded = function(event) {
-	var db = event.target.result;
-	var objectStore = db.createObjectStore("userAccounts", {keyPath: "address"});
-	
-	/*for (var i in employeeData) {
-	   objectStore.add(employeeData[i]);
-	}
-	//console.log('onupgradeneeded executed: employee table created');
-	* */
- }
-
-
-function addAccount(addr, accName, pAddr, priAddr, extLoginKey) {
-	
-			let encPrivateKey = CryptoJS.AES.encrypt(priAddr, extLoginKey); 
-			////console.log("encryptedPrivateKey: " + encPrivateKey);
-	
-            var request = db.transaction(["userAccounts"], "readwrite")
-            .objectStore("userAccounts")
-            .add({ address: addr, name: accName, publicAddress: pAddr, privateAddress: encPrivateKey.toString() });
-            
-            request.onsuccess = function(event) {
-               //console.log("Account has been added to your database.");
-            };
-            
-            request.onerror = function(event) {
-               //console.log("Unable to add data. It is already exist in your database! ");
-            }
-}
-
-function removeAccount(address) {
-            var request = db.transaction(["userAccounts"], "readwrite")
-            .objectStore("userAccounts")
-            .delete(address);
-            
-            request.onsuccess = function(event) {
-               //console.log("Entry has been removed from your database.");
-            };
-}
-
-function loadZilAccount(addr='f7c08521fc6b50d19f9863a40013db227b72cd2f'){
-    let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
-    let request = objectStore.get(addr);
-    
-    //Creating Identicon
-    var icon = blockies.create({ // All options are optional
-        seed: addr, 
-    });
-    
-    request.onerror = function(event) {
-       //console.log("Unable to retrieve data from database!");
-    };
-
-    request.onsuccess = function(event) {
-        if(request.result) {
-            $("#homeAccName").html(request.result.name);
-            //$("#homeAccName").append("&nbsp;&nbsp;&nbsp;&nbsp;");
-            $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
-        }
-        else{
-            $("#homeAccName").html('Account');
-            $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
-        }
-    };
-    
-    // use callback to get the Balance
-    laksa.zil.getBalance({ address: addr }, (err, data) => {
-      if (err) {
-        //console.log(err);
-      }
-      //console.log(data);
-      $("#homeZilBalance").html(data.balance+" Zils");
-    });
-    //let accName = readAccount(addr);
-    //console.log("Name is");
-    //console.log(readAccount(addr));
-    ////console.log(accName.name);
-    
-    
-    $("#homeAccName").html('Account');
-    $("#homeAccName").append(icon);
-    $("#homeAddress").html(addr);
-}
-
 function setAllDBAccounts(){
     chrome.storage.local.set({userAccounts: extAccountData}, function() {
           console.log('Value is set to ');
@@ -123,12 +10,17 @@ function getAllDBAccounts(){
           console.log("Getting Values");
           console.log(result.userAccounts);
           extAccountData = result.userAccounts;
-          deleteAccount(7);
+          dbloaded = 1;
     });
 }
 
-function addNewAccount(accountName){
+function getAccount(index){
+          return extAccountData[index];
+}
+
+function createDBAccount(accountName){
     let newAccount = laksa.wallet.createAccount();
+    newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);
     extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
     console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
     console.log(extAccountData);
@@ -136,9 +28,10 @@ function addNewAccount(accountName){
           console.log('Value is set to ');
           console.log(extAccountData);
     });
+    return newAccount.address;
 }
 
-function deleteAccount(index){
+function deleteDBAccount(index){
     if (index > -1) {
       extAccountData.splice(index, 1);
       console.log(index);
@@ -151,6 +44,34 @@ function deleteAccount(index){
           console.log('Value is set to ');
           console.log(extAccountData);
     });
+}
+
+function loadAccount(index){
+    let timer = setInterval(function(){
+        let acDetails = getAccount(index);
+        if(acDetails != undefined){
+            $("#homeAccName").html(acDetails.name);
+            $("#homeAddress").html(acDetails.address);
+            let icon = blockies.create({ seed: acDetails.address });
+            $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
+            $("#homeZilBalance").html("Fetching Balance");
+            laksa.zil.getBalance({ address: acDetails.address }, (err, data) => {
+              if (err) {
+                $("#homeZilBalance").html("Not Connected !!!");
+              }
+              //console.log(data);
+              $("#homeZilBalance").html(data.balance+" Zils");
+            });
+            background.selectedAccount = index;
+            $("#selectedAccountPrivateKey").html("******************************************************<br>**********");
+            $("#selectedAccountPublicKey").html(acDetails.publicAddress);
+            $("#hidePrKey").hide();
+            $("#showPrKeyPopup").show();
+            console.log('acDetails');
+            console.log(acDetails);
+            window.clearInterval(timer);
+        }
+    }, 100);
 }
 
 function getAccountIndex(accAddress){
@@ -219,6 +140,8 @@ function readAllAccounts() {
           cursor.continue();
        } else {
           console.log("Reading Ended");
+          getAllDBAccounts();
+          loadAccount(4);
        }
     };
 }

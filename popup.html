@@ -126,10 +126,57 @@
               </div>
               
               <div id="div-accounts">
-                <div id="accountSelect"></div>
-                <button id="accbtnTry">set</button>
+<!--<a id href="#popupLogin" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Sign in</a>-->
+
+                <div class="accountSelectText">Select Account</div><div id="accountSelect"></div>
+                <div class="accountSelectText">Account Details</div>
+                <div class="seletectAccountDetails">
+                    <div style="color:#A60202;">Private Key:
+                        <a href="#popupShowPrKey" data-position-to="window" data-rel="popup" data-transition="pop" id="showPrKeyPopup" class="ui-btn ui-btn-inline">Click to Show</a>
+                        <button id="hidePrKey" class="ui-btn ui-btn-inline">Click to Hide</button>
+                        <div data-role="popup" id="popupShowPrKey" data-theme="a" class="ui-corner-all">
+                            <div style="padding:10px 20px;">
+                                <h3>Enter Password:</h3>
+                                <label for="pw" class="ui-hidden-accessible">Password:</label>
+                                <input type="password" name="pass" id="prKeyPassInput" placeholder="Password" data-theme="a">
+                                <button id="showPrKey" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check">View</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accountKeysDiv" id="selectedAccountPrivateKey"></div>
+                    <div style="color:#004E03;">Public Key:</div>
+                    <div class="accountKeysDiv" id="selectedAccountPublicKey"></div>
+                </div>
+                <div class="text-center">
+                   
+                    <!--Create Account-->
+                    <a href="#createAccPopup" data-position-to="window" data-rel="popup" data-transition="pop" id="createAccBtn" class="ui-btn ui-btn-inline accountManagerBtn">Create Account</a>
+                    <div id="createAccPopup" data-role="popup" id="popup" data-theme="a" class="ui-corner-all">
+                            <div style="padding:10px 20px;">
+                                <h3>Enter Account Name:</h3>
+                                <label for="pw" class="ui-hidden-accessible">Password:</label>
+                                <input type="text" name="text" id="createAccInput" placeholder="Account Name" data-theme="a">
+                                <a id="createAccountBtn" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left ui-icon-check" data-rel="back">Create</a>
+                            </div>
+                        </div>
+                    <button id="importAccBtn" class="ui-btn ui-btn-inline accountManagerBtn">Import Account</button>
+                    
+                    <!--Delete Account-->
+                    <a href="#deleteAcPopupDialog" id="deleteAccBtn" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-inline accountManagerBtn">Delete Account</a>
+                    <div data-role="popup" id="deleteAcPopupDialog" data-overlay-theme="b" data-theme="a" data-dismissible="false" style="max-width:400px;">
+                        <div data-role="header" data-theme="a">
+                        <h1>Delete Account?</h1>
+                        </div>
+                        <div role="main" class="ui-content">
+                            <h3 class="ui-title">Are you sure you want to delete this Account?</h3>
+                        <p>This action cannot be undone.</p>
+                            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back">Cancel</a>
+                            <a id="confirmDelAcBtn" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-rel="back" data-transition="flow">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                
               </div>
-            
               
               <div id="tab-send">
                 <!--<label for="sendFromSelect" style="font-size:15px;">From:</label>
@@ -254,9 +301,7 @@
         
 
         
-        <div data-role="popup" id="popupMessage">
-          dsdfsd sdkjf sdjkfn skjfn sedkfjns sdjkfnsd sdkjfnsd sdkjfsdf sdkjfnsdk
-        </div>
+        <div data-role="popup" id="popupMessage"></div>
     </body>
     
 </html>

@@ -23,9 +23,8 @@
 
 
 body {
-    background-color: rgb(242, 242, 242);
+    background-color: #E8FCFF;
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 
@@ -319,6 +318,74 @@ body {
     overflow: auto;
 }
 
+#div-accounts{
+    height: 300px;
+    overflow: auto;
+}
+#accountSelect{
+    margin:auto;
+}
+.accountSelectText{
+    font-weight:700;
+    text-align:center;
+    margin-top: 5px;
+}
+#selectedAccountPrivateKey{
+    text-align: center;
+    border: 1px solid #A60202;
+    color:#A60202;
+    border-radius: 5px;
+    word-wrap: break-word;
+    background:#fff;
+    font-size:12px;
+}
+#showPrKeyPopup{
+    margin:5px;
+    padding: 3px;
+    text-align:left;
+    font-size:12px;  
+}
+#hidePrKey{
+    display:none;
+    margin:5px;
+    padding: 3px;
+    text-align:left;
+    font-size:12px;  
+}
+#selectedAccountPublicKey{
+    text-align: center;
+    border: 1px solid #004E03;
+    color:#004E03;
+    border-radius: 5px;
+    word-wrap: break-word;
+    background:#fff;
+    font-size:12px;
+}
+.accountKeysDiv{
+    margin-bottom:5px;
+}
+.accountManagerBtn{
+    margin:4px;
+    margin-top:10px;
+    padding: 5px;
+    font-size:12px; 
+}
+#createAccBtn{
+    background: #007A8F;
+    color:#fff;
+    text-shadow: none;
+}
+#importAccBtn{ 
+    background: #007A8F;
+    color:#fff;
+    text-shadow: none;
+}
+#deleteAccBtn{ 
+    background: #007A8F;
+    color:#fff;
+    text-shadow: none;
+}
+
 #tab-send{
     height: 270px;
     overflow: auto;
@@ -431,7 +498,7 @@ body {
     left: 5 !important;
 }*/
 
-#popupMessage{
+#popupMessage{   
     font-size:14px;
     text-align:center;
     padding:5px 10px;
@@ -439,4 +506,5 @@ body {
     color:#910000;
     border-radius: 20px;
 }
+
 

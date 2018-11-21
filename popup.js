@@ -1,19 +1,18 @@
-/*function myFunction() {
-    //console.log("Function Called");
-    var x = document.getElementById("sec1");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}*/
-/*var str = '087D1996982063B65C50687DA7874BD70A79F5F3';
-var s1 = str.slice(0,4);
-var s2 = str.slice(-4,-1)+str.slice(-1);
-console.log(s1+'...'+s2); //=> '12345678'
-*/
+/*
+Old Testnets
+dev-test-api: https://dev-test-api.aws.z7a.xyz
+dev-test-explorer: https://dev-test-explorer.aws.z7a.xyz
+* 
+* 
+New Testnets - Tested on Zilliqa-js-monorepo
+* https://api-scilla.zilliqa.com/
+* https://explorer-scilla.zilliqa.com/
+
+ * */
+
+
 var background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
-background.status = 0;
+//background.status = 0;
 //background.status = parseInt(background.status)+1;
 //console.log(background.status);
 
@@ -123,6 +122,21 @@ $(function(){
         loadZilAccount(btn.target.name);
         
     });
+    
+    $("#showPrKey").click(function() {
+        showPrivateKey(1);
+    });
+    $("#hidePrKey").click(function() {
+        showPrivateKey(0);
+    });
+    $("#confirmDelAcBtn").click(function() {
+        deleteAccount();
+    });
+    
+    $("#createAccountBtn").click(function() {
+        createAccount();
+    });
+    
     
     $("#tab-sending").click(function() {
         sendTabLoader();
