@@ -12,9 +12,6 @@ New Testnets - Tested on Zilliqa-js-monorepo
 
 
 var background = chrome.extension.getBackgroundPage(); //do this in global scope for popup.js
-//background.status = 0;
-//background.status = parseInt(background.status)+1;
-//console.log(background.status);
 
 function hideall(){
     $("#login").hide();

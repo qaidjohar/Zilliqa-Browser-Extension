@@ -1,14 +1,12 @@
 function setAllDBAccounts(){
     chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          console.log('Value is set to ');
-          console.log(extAccountData);
+          //console.log(extAccountData);
     });
 }
 
 function getAllDBAccounts(){
     chrome.storage.local.get(['userAccounts'], function(result) {
-          console.log("Getting Values");
-          console.log(result.userAccounts);
+          //console.log(result.userAccounts);
           extAccountData = result.userAccounts;
           dbloaded = 1;
     });
@@ -40,11 +38,11 @@ function createInitialAccount(key){
     let newAccount = laksa.wallet.createAccount();
     newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, key);
     extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
-    console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
-    console.log(extAccountData);
+    //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
+    //console.log(extAccountData);
     chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          console.log('Value is set to ');
-          console.log(extAccountData);
+          //console.log('Value is set to ');
+          //console.log(extAccountData);
     });
     return newAccount.address;
 }
@@ -53,11 +51,11 @@ function createDBAccount(accountName){
     let newAccount = laksa.wallet.createAccount();
     newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);
     extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
-    console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
-    console.log(extAccountData);
+    //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
+    //console.log(extAccountData);
     chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          console.log('Value is set to ');
-          console.log(extAccountData);
+          //console.log('Value is set to ');
+          //console.log(extAccountData);
     });
     return newAccount.address;
 }
@@ -65,15 +63,15 @@ function createDBAccount(accountName){
 function deleteDBAccount(index){
     if (index > -1) {
       extAccountData.splice(index, 1);
-      console.log(index);
+      //console.log(index);
     }
     else{
-        console.log("No such index");
+        //console.log("No such index");
     }
-    console.log(extAccountData);
+    //console.log(extAccountData);
     chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          console.log('Value is set to ');
-          console.log(extAccountData);
+          //console.log('Value is set to ');
+          //console.log(extAccountData);
     });
 }
 
@@ -98,8 +96,8 @@ function loadAccount(index){
             $("#selectedAccountPublicKey").html(acDetails.publicAddress);
             $("#hidePrKey").hide();
             $("#showPrKeyPopup").show();
-            console.log('acDetails');
-            console.log(acDetails);
+            //console.log('acDetails');
+            //console.log(acDetails);
             window.clearInterval(timer);
         }
     }, 100);

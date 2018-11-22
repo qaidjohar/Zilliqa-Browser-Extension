@@ -310,10 +310,10 @@ function initiateTransaction(){
     if(gasLimit.length == 0){ displayErrorPopups("Gas Limit Invalid"); return; }
     let acDetails = getAccount(background.selectedAccount);
     let decPrivateKey = CryptoJS.AES.decrypt(acDetails.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);
-    console.log(acDetails);
-    console.log(decPrivateKey);
+    //console.log(acDetails);
+    //console.log(decPrivateKey);
     let account = laksa.wallet.importAccountFromPrivateKey(decPrivateKey);
-    console.log(account);
+    //console.log(account);
     if(account == false){ setTimeout( function(){ displayErrorPopups("Unable to fetch Private Key..Reload Extension"); }, 100 ); return; }
     
     let transaction = new laksa.Modules.Transaction({
@@ -323,9 +323,9 @@ function initiateTransaction(){
         gasPrice: laksa.util.toBN(1),
         gasLimit: laksa.util.toBN(10)
     });
-    console.log(transaction);
+    //console.log(transaction);
     account.signTransaction(transaction).then(d=>laksa.zil.createTransaction(d)).then(e=>{
-        console.log(e);
+        //console.log(e);
         $('#sendToAddress').val('');
         $('#sendAmount').val('');
         $('#sendGasPrice').val('');
@@ -353,9 +353,9 @@ function receiveTabLoader(){
 
 function accountSelector(selectedVal = '-1'){
     let selectData = []; // create an empty array    
-    console.log(extAccountData);
+    //console.log(extAccountData);
     $.each(extAccountData, function(index, val) {
-        console.log( val.name + " ("+index+")");
+        //console.log( val.name + " ("+index+")");
         let icon = blockies.create({ // All options are optional
 			seed: val.address, 
 		})
@@ -366,7 +366,7 @@ function accountSelector(selectedVal = '-1'){
             imageSrc: icon.toDataURL()
         });
     });
-    console.log(selectData);
+    //console.log(selectData);
     $('#accountSelect').ddslick({
         data: selectData,
         width: "98%",
@@ -375,13 +375,13 @@ function accountSelector(selectedVal = '-1'){
         background: "#fff",
         selectText: "Select Account",
         onSelected: function(data){
-            console.log(data.selectedIndex);
+            //console.log(data.selectedIndex);
             loadAccount(data.selectedIndex);
         }
     });
     if(selectedVal >= 0 && selectedVal < selectData.length){
         $('#accountSelect').ddslick('select', {index: selectedVal.toString()});
-        console.log(selectedVal);
+        //console.log(selectedVal);
     }
 }
 
