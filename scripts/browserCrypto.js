@@ -28,6 +28,11 @@ function displayErrorPopups(message){
     $( "#popupMessage" ).popup( "open");
     setTimeout( function(){ $( "#popupMessage" ).popup( "close" ); }, 3000 );	 	 
 }
+function displaySuccessPopups(message){
+    $("#popupMessageSuccess").html(message);
+    $( "#popupMessageSuccess" ).popup( "open");
+    setTimeout( function(){ $( "#popupMessageSuccess" ).popup( "close" ); }, 3000 );	 	 
+}
 
 function shortAddress(address){
     let s1 = address.slice(0,4);
@@ -138,15 +143,18 @@ function resetExtPassword(){
         //Checking of Seed Phrase entered matches with seed phrase hash in DB
         if(result.extSeedPhraseHash != $.sha1(seedPhrase)){
            //console.log("Seed Phrase Mismatched");
+           displayErrorPopups("Seed Phrase not correct!");
            return;
         }
         //Check if password not empty
         if(!emptyInputCheck(resetPassword)){
+            displayErrorPopups("Empty Password!");
             //console.log("Empty Password");
             return;
         }
         //Check if password and confirm password are same
         if(resetPassword != resetConfirmPassword){
+            displayErrorPopups("Password doesn't Match");
             //console.log("Password doesn't Match");
             return;
         }
@@ -157,7 +165,8 @@ function resetExtPassword(){
 			extLoginKey = newPassword;
             //console.log("Reset Password Set."); 
             hideall();
-            $("#login").show();           
+            $("#login").show(); 
+            setTimeout(function(){displaySuccessPopups("Password Reset Complete");},100);         
         });  // local.set function
       
     });
@@ -212,7 +221,7 @@ function loginAuth(){
 		 // Case 2: default key exists : ensure it is correct for development testing
 		 if (theStoredPassSHA1 != theLoginPassSHA1) {
 			 //console.log('Wrong Seed Phase. Please try again...');	
-             displayErrorPopups("Invalid Password!")	
+             displayErrorPopups("Invalid Password!");
 		 } else{
 			extLoginKey = password;
             background.extLoginKey = password;
@@ -331,7 +340,7 @@ function initiateTransaction(){
         $('#sendGasPrice').val('');
         $('#sendGasLimit').val('');
         if(e.TranID != undefined){
-            displayErrorPopups("Success. TransID: "+e.TranID);
+            displaySuccessPopups("Success. TransID: "+e.TranID);
             let tabUrl = 'https://explorer-scilla.zilliqa.com/transactions/'+e.TranID.toString();
             chrome.tabs.create({url: tabUrl, active: false});
         } else {

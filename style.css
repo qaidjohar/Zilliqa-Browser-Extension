@@ -533,5 +533,13 @@ body {
     color:#910000;
     border-radius: 20px;
 }
+#popupMessageSuccess{   
+    font-size:14px;
+    text-align:center;
+    padding:5px 10px;
+    background-color: #E9F9E6;
+    color:#005D27;
+    border-radius: 20px;
+}
 
 
