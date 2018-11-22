@@ -116,9 +116,9 @@ function loginSetup(){
             //console.log("Password Set.");            
         });  // local.set function
         
-        //let setSeed = $.sha1(seedPhraseTrimmed);
-        ////console.log(CryptoJS.AES.encrypt(seedPhraseTrimmed, extLoginKey)).toString();
-        chrome.storage.local.set({extSeedPhrase: seedPhraseTrimmed}, function() {
+        let setSeed = $.sha1(seedPhraseTrimmed);
+        seedPhraseEncrypted = CryptoJS.AES.encrypt(seedPhraseTrimmed, newPassword)
+        chrome.storage.local.set({extSeedPhrase: seedPhraseEncrypted}, function() {
             //console.log("Seed Phrase Set.");            
         });  // local.set function
         //Setting seed phrase Hash
@@ -160,6 +160,9 @@ function resetExtPassword(){
         }
         
         //setting new password in db
+        $('#resetSeedPhrase').val('');
+        $('#resetPassword').val('');
+        $('#resetConfirmPassword').val('');
         let setPwd = $.sha1(resetPassword);
         chrome.storage.local.set({extLoginKey: setPwd}, function() {
 			extLoginKey = newPassword;
