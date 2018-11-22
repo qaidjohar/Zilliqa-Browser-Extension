@@ -12,7 +12,7 @@ The following are the features and functionalities of the extension.
 1. Mnemonic Code Generation and Display
 2. User Password Setup
 3. User Login
-4. User Password Forgot/Reset Functionality
+4. User Password Forget/Reset Functionality
 5. Account Creation and setting its Account Name
 6. Account Import using its Private Key
 7. Account Deletion with Confirmation
@@ -66,7 +66,7 @@ Done...Zilliqa Browser Extension Loaded Successfully.
 ### Receive Amount using QR Code
 ![Receive](docs/screenshots/8.png)
 
-###Stats: Provides updated statictical information about Zils.
+### Stats: Provides updated statictical information about Zils.
 
 ![Stats](docs/screenshots/9.png)
     
