@@ -35,6 +35,20 @@ function importDBAccount(accountName,privateKey){
     }    
 }
 
+function createInitialAccount(key){
+    let accountName = 'First Account'
+    let newAccount = laksa.wallet.createAccount();
+    newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, key);
+    extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
+    console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
+    console.log(extAccountData);
+    chrome.storage.local.set({userAccounts: extAccountData}, function() {
+          console.log('Value is set to ');
+          console.log(extAccountData);
+    });
+    return newAccount.address;
+}
+
 function createDBAccount(accountName){
     let newAccount = laksa.wallet.createAccount();
     newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);
@@ -114,51 +128,3 @@ function getAccountAddress(accIndex){
     }
 });*/
 
-function readAllDBAccounts(){
-    let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
-    extAccountData = [];
-    objectStore.openCursor().onsuccess = function(event) {
-        var cursor = event.target.result;
-        let i=0;
-        if (cursor) {
-            //let decPrivateKey = CryptoJS.AES.decrypt(cursor.value.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);; 
-            //cursor.value.privateAddress = decPrivateKey;
-            extAccountData.push(
-                cursor.value,
-            );            
-            cursor.continue();
-        } else {
-          console.log(extAccountData);
-          //addNewAccount("My New Account");
-          //deleteAccount(7);
-        }
-    };
-}
-
-function readAllAccounts() {
-    let objectStore = db.transaction("userAccounts").objectStore("userAccounts");
-    $("#panelAccountNames").html("");
-    objectStore.openCursor().onsuccess = function(event) {
-       var cursor = event.target.result;
-       let i=0;
-       if (cursor) {
-          //console.log("Key " + cursor.key + " is " + cursor.value);
-          extAccountArray[cursor.key] = cursor.value;
-          if (i == 0) {
-              i += 1;
-              loadZilAccount(cursor.key);
-          }
-          let icon = blockies.create({ // All options are optional
-			seed: cursor.value.address, 
-		});
-		//$("#panelAccountNames").append(icon);
-         // $("#panelAccountNames").append("<button id='accBtn' class='ui-btn ui-icon-user ui-btn-icon-left ui-corner-all'>"+cursor.value.name+"</button>");
-          $("#panelAccountNames").append("<button id='accBtn' name='"+cursor.value.address+"' class='ui-btn ui-corner-all'> <img src="+ icon.toDataURL()+" /> "+ cursor.value.name +"</button>");
-          cursor.continue();
-       } else {
-          console.log("Reading Ended");
-          getAllDBAccounts();
-          loadAccount(4);
-       }
-    };
-}

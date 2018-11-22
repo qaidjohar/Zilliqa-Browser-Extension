@@ -106,24 +106,23 @@ function loginSetup(){
         });
         
         let setPwd = $.sha1(newPassword);
-        chrome.storage.sync.set({extLoginKey: setPwd}, function() {
+        chrome.storage.local.set({extLoginKey: setPwd}, function() {
 			extLoginKey = newPassword;
             //console.log("Password Set.");            
-        });  // sync.set function
+        });  // local.set function
         
         //let setSeed = $.sha1(seedPhraseTrimmed);
         ////console.log(CryptoJS.AES.encrypt(seedPhraseTrimmed, extLoginKey)).toString();
-        chrome.storage.sync.set({extSeedPhrase: seedPhraseTrimmed}, function() {
+        chrome.storage.local.set({extSeedPhrase: seedPhraseTrimmed}, function() {
             //console.log("Seed Phrase Set.");            
-        });  // sync.set function
+        });  // local.set function
         //Setting seed phrase Hash
-        chrome.storage.sync.set({extSeedPhraseHash: $.sha1(seedPhraseTrimmed)}, function() {
+        chrome.storage.local.set({extSeedPhraseHash: $.sha1(seedPhraseTrimmed)}, function() {
             //console.log("Seed Phrase in Hash Set.");            
-        });  // sync.set function
+        });  // local.set function
         
         //Create an initial account 
-        let initialAccount = laksa.wallet.createAccount();
-        addAccount(initialAccount.address, accountName, initialAccount.publicKey, initialAccount.privateKey, extLoginKey);
+        createInitialAccount(newPassword);
     }
 }
 
@@ -133,7 +132,7 @@ function resetExtPassword(){
     let resetConfirmPassword = $('#resetConfirmPassword').val();
     
     //Retriveing the HASH of Seed Phrase
-    chrome.storage.sync.get(['extSeedPhraseHash'], function(result) {
+    chrome.storage.local.get(['extSeedPhraseHash'], function(result) {
         //console.log('Seed Phrase currently is ' + result.extSeedPhraseHash);
         
         //Checking of Seed Phrase entered matches with seed phrase hash in DB
@@ -154,12 +153,12 @@ function resetExtPassword(){
         
         //setting new password in db
         let setPwd = $.sha1(resetPassword);
-        chrome.storage.sync.set({extLoginKey: setPwd}, function() {
+        chrome.storage.local.set({extLoginKey: setPwd}, function() {
 			extLoginKey = newPassword;
             //console.log("Reset Password Set."); 
             hideall();
             $("#login").show();           
-        });  // sync.set function
+        });  // local.set function
       
     });
 }
@@ -201,7 +200,7 @@ function loginAuth(){
     let theLoginPassSHA1 = $.sha1(password);
     let theStoredPassSHA1;
     
-    chrome.storage.sync.get(['extLoginKey'], function(result) {         
+    chrome.storage.local.get(['extLoginKey'], function(result) {         
          theStoredPassSHA1 = result.extLoginKey; 
          
          // Case 1: default Key doesn't exists
@@ -223,10 +222,8 @@ function loginAuth(){
             getAllDBAccounts();
             loadAccount(background.selectedAccount);
             setTimeout(function(){accountSelector(background.selectedAccount);},100);
-            //readAllAccounts();
-            //loadZilAccount();
 		 }
-     }); // sync.get function    
+     }); // local.get function    
 }
 
 function showPrivateKey(flag){
