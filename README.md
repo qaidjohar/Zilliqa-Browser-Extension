@@ -2,7 +2,7 @@
 
 Zilliqa Browser Extension is a chrome based web browser extension which provides an interface to the users to communicate with the Zilliqa Blockchain. 
 
-This Project is under development funded by [Zilliqa Echo Grant Program](https://blog.zilliqa.com/announcing-the-first-zilliqa-ecosystem-grant-awardees-4ccb39ef83c9). 
+This Project is under development, funded by [Zilliqa Ecosystem-Grant Program](https://blog.zilliqa.com/announcing-the-first-zilliqa-ecosystem-grant-awardees-4ccb39ef83c9). 
 
 
 ## Features Completed
