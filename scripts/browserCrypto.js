@@ -189,7 +189,7 @@ function initCheck(){
 }
 
 function logout(){
-    backgroung.status = 0;
+    background.status = 0;
     background.extLoginKey = null;
     hideall();
     $("#login").show();
@@ -220,8 +220,11 @@ function loginAuth(){
             background.status = 1;
 			hideall();
 			$("#home").show();
-            readAllAccounts();
-            loadZilAccount();
+            getAllDBAccounts();
+            loadAccount(background.selectedAccount);
+            setTimeout(function(){accountSelector(background.selectedAccount);},100);
+            //readAllAccounts();
+            //loadZilAccount();
 		 }
      }); // sync.get function    
 }
