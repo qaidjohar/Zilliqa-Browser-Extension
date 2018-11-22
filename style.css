@@ -1,6 +1,6 @@
 
 /*Panel Not scrolling bug fixing code*/
-.ui-panel.ui-panel-open {
+/*.ui-panel.ui-panel-open {
     position:fixed;
 }
 .ui-panel-inner {
@@ -11,7 +11,7 @@
     bottom: 0px;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
-}
+}*/
 
 
 .center-align {
@@ -45,13 +45,39 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.navbar a {
+#logo-image{
+    height:25px;
+    margin: 4px 15px;
+    margin-top:6px;
+}
+
+/*.navbar a {
     float: left;
     font-size: 16px;
     color: black;
     text-align: center;
     padding: 10px 10px 5px 10px;
     text-decoration: none;
+}*/
+
+#endpointSelector{
+    margin: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border:none;
+    background:#fff;
+}
+#endpointSelector:hover{
+    background:#ddd;
+}
+#logout{
+    margin: 0px;
+    padding:6px;
+    border:none;
+    background:#fff;
+}
+#logout:hover{
+    background:#ddd;
 }
 
 .dropdown {
@@ -273,7 +299,7 @@ body {
 
 .home-account-container {
     margin: 0px;
-    margin-top:30px;
+    margin-top:20px;
     margin-left: 10px;
     border: 1px solid #333;
     overflow: auto;
@@ -313,13 +339,8 @@ body {
 
 
 
-#history{
-    height: 270px;
-    overflow: auto;
-}
-
 #div-accounts{
-    height: 300px;
+    height: 330px;
     overflow: auto;
 }
 #accountSelect{
@@ -392,7 +413,7 @@ body {
 }
 
 #tab-send{
-    height: 270px;
+    height: 330px;
     overflow: auto;
 }
 #tab-send div{
@@ -422,8 +443,8 @@ body {
     margin-right: 10px;
 }
 #receive-div{
-    height: 270px;
-    /*overflow: auto;*/
+    height: 330px;
+    overflow: auto;
 }
 #receive-div div{
     margin: 10px;
@@ -440,16 +461,15 @@ body {
     text-align:center;
     font-size:12px;
     background:white;
-    padding-left :-10px;
     margin:0px;
-    padding:0px;
+    padding:5px;
 }
 #receive-addrDisp:hover{
     background-color: #D0D0D0;
 }
 
 #tab-stats{
-    height: 270px;
+    height: 330px;
     overflow: auto;
 }
 

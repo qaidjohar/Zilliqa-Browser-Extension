@@ -61,8 +61,7 @@ $(function(){
     });
     
     $('#logout').click(function(){
-        hideall();
-        $("#login").show();
+        logout();
     });
     
     $('#login-seed').click(function(){

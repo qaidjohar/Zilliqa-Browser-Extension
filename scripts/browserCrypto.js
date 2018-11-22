@@ -188,6 +188,13 @@ function initCheck(){
     });
 }
 
+function logout(){
+    backgroung.status = 0;
+    background.extLoginKey = null;
+    hideall();
+    $("#login").show();
+}
+
 function loginAuth(){
     let password =  $('#password').val();
     $('#password').val('');
@@ -292,7 +299,6 @@ function sendTabLoader(){
 }
 
 function initiateTransaction(){
-    
     //$( "#popupUndismissible" ).popup( "open");
     let sendTo = $('#sendToAddress').val();
     let amount = $('#sendAmount').val();
@@ -324,48 +330,25 @@ function initiateTransaction(){
         $('#sendAmount').val('');
         $('#sendGasPrice').val('');
         $('#sendGasLimit').val('');
-        if(e.TranID != undefined)
-            displayErrorPopups("TransID: "+e.TranID);
-        else
+        if(e.TranID != undefined){
+            displayErrorPopups("Success. TransID: "+e.TranID);
+            let tabUrl = 'https://explorer-scilla.zilliqa.com/transactions/'+e.TranID.toString();
+            chrome.tabs.create({url: tabUrl, active: false});
+        } else {
             displayErrorPopups("Error: "+e.Error);
+        }
         return;
     });
 }
 
 function receiveTabLoader(){
-    let selectData = []; // create an empty array    
-    //console.log(extAccountArray);
-    
-    //Filling accounts into From select box in send tab
-    //$('#sendFromSelect').html("");
-    $.each(extAccountArray, function(key, val) {
-        console.log( val.name + " ("+key+")");
-        let icon = blockies.create({ // All options are optional
-			seed: key, 
-		});
-        selectData.push({
-            text: val.name,
-            value: key,
-            description: key,
-            imageSrc: icon.toDataURL()
-        });
+    let account = getAccount(background.selectedAccount);
+    $("#receive-accountName").html(account.name);
+    $("#receive-QRGenerator").html("");
+    jQuery(function(){
+        jQuery('#receive-QRGenerator').qrcode({width: 160,height: 160,text: account.address});
     });
-    $('#receive-selectToQR').ddslick({
-        data: selectData,
-        width: 300,
-        height:150,
-        imagePosition: "left",
-        selectText: "Receiver Account",
-        onSelected: function(data){
-            console.log(data.selectedData.value);
-            $("#receive-QRGenerator").html("");
-            jQuery(function(){
-                jQuery('#receive-QRGenerator').qrcode({width: 140,height: 140,text: data.selectedData.value});
-            });
-            $('#receive-addrDisp').html(data.selectedData.value);
-        }
-    });
-    
+    $('#receive-addrDisp').html(account.address);
 }
 
 function accountSelector(selectedVal = '-1'){

@@ -21,34 +21,25 @@
     </head>
     <body style="width:357px; height:530px;" id="body">     
         <div class="navbar">
-          <a href="#home"><img src="logo.png" alt="logo" height="20px"></a>
+          <img id="logo-image" src="logo.png" alt="logo">
          <!-- <a href="#"><img src="box.png" alt="logo" height="20px"></a> -->
           
 		  
           <div class="nav-right"> 
-              <div class="dropdown">
-  <!--                <button class="dropbtn ui-btn ui-shadow ui-icon-recycle ui-btn-icon-notext ui-btn-inline">
-                </button>
+                  <!--<button class="dropbtn ui-btn ui-shadow ui-icon-recycle ui-btn-icon-notext ui-btn-inline"></button>-->
+              <a href="#selectEndPoint" id="endpointSelector" data-rel="popup" data-transition="pop" class="ui-btn ui-icon-recycle ui-btn-icon-left ui-btn-inline">Zilliqa Test-Net</a>
+              <div data-role="popup" id="selectEndPoint" data-theme="a">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                    <li data-role="list-divider">Select Endpoint</li>
+                    <li><a href="#" data-rel="back">Zilliqa Test-Net</a></li>
+                    <li><a href="#" data-rel="back">Zilliqa Main-Net</a></li>
+                    <li><a href="#" data-rel="back">localhost 4201</a></li>
+                </ul>
+              </div>
                 
-              <div class="dropdown-content">
+             
+              <button id="logout" class="ui-btn ui-icon-power ui-btn-icon-notext ui-btn-inline"> </button>
 
-                  <a href="#">Zilliqa Main Net</a>
-                  <a href="#">Zilliqa Test Net</a>
-                  <a href="#">localhost 4201</a>
--->
-				<div>
-                  <select class="dropdown-select">
-					<option value="ZilTestNet">Zilliqa Test Net</option>
-					<option value="ZilMainNet">Zilliqa Main Net</option>				
-					
-				</select>
-                </div>
-              </div>
-              
-              <div class="dropdown">
-                <button id="logout" class="dropbtn ui-btn ui-shadow ui-icon-power ui-btn-icon-notext ui-btn-inline">
-                </button>
-              </div>
           </div> 
         </div>
         
@@ -97,9 +88,9 @@
         
         
         <div id="home" style="display:none">
-            <div class="account-panel ui-nodisc-icon ui-alt-icon">
+            <!--<div class="account-panel ui-nodisc-icon ui-alt-icon">
                 <a href="#mypanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext ui-btn-inline" style="align:left" data-inline="true" data-iconpos="notext" data-theme="a" data-role="button">Account</a>
-            </div>
+            </div>-->
             
             
             <div class="home-account-container">                
@@ -128,8 +119,8 @@
               <div id="div-accounts">
 <!--<a id href="#popupLogin" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-check ui-btn-icon-left ui-btn-a" data-transition="pop">Sign in</a>-->
 
-                <div class="accountSelectText">Select Account</div><div id="accountSelect"></div>
-                <div class="accountSelectText">Account Details</div>
+                <div class="accountSelectText" style="margin-top:15px;">Select Account</div><div id="accountSelect"></div>
+                <div class="accountSelectText" style="margin-top:15px;">Account Details</div>
                 <div class="seletectAccountDetails">
                     <div style="color:#A60202;">Private Key:
                         <a href="#popupShowPrKey" data-position-to="window" data-rel="popup" data-transition="pop" id="showPrKeyPopup" class="ui-btn ui-btn-inline">Click to Show</a>
@@ -212,7 +203,7 @@
               </div>
               
               <div id="receive-div">
-                <div id="receive-selectToQR"></div>
+                <h2 id="receive-accountName" class="text-center"></h2>
                 <div id="receive-QRGenerator"></div>
                 <!--<div id="receiveAddr" title = "Click to Copy Address"><span id="receive-addrDisp" ></span></div>-->
                 <div id="receiveAddr">
@@ -269,14 +260,13 @@
             
             
             
-            <div data-role="content">
+            <!--<div data-role="content">
                 <div align="left">
                     <div data-role="panel" id="mypanel" data-position="left" data-display="overlay">
                         
                         <h3>My Accounts</h3>
                         <hr>
                         <div id='panelAccountNames'>
-                            <!--<button class="ui-btn ui-icon-user ui-btn-icon-left ui-corner-all">Account 1</button>-->
                         </div>
                         <hr>
                         <button id="create-account" class="ui-btn ui-icon-plus ui-btn-icon-left ui-corner-all">Create Account</button>
@@ -286,7 +276,7 @@
                     </div>
                     
                 </div>
-            </div>
+            </div>-->
             <div data-position="fixed" data-role="footer" align="center">
                 
             </div>	
