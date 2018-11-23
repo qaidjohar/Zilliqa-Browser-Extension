@@ -331,9 +331,9 @@ function initiateTransaction(){
     let transaction = new laksa.Modules.Transaction({
         version: 0,
         toAddr: sendTo,
-        amount: laksa.util.toBN(1),
-        gasPrice: laksa.util.toBN(1),
-        gasLimit: laksa.util.toBN(10)
+        amount: laksa.util.toBN(parseInt(amount)),
+        gasPrice: laksa.util.toBN(parseInt(gasPrice)),
+        gasLimit: laksa.util.toBN(parseInt(gasLimit))
     });
     //console.log(transaction);
     account.signTransaction(transaction).then(d=>laksa.zil.createTransaction(d)).then(e=>{
