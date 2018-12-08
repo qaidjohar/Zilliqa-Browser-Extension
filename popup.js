@@ -146,6 +146,9 @@ $(function(){
     $("#sendTransaction").click(function() {
         initiateTransaction();
     });
+    $('#sendToAddress').change(function () { 
+        sendtoaddrIdenticon();
+    });
             
     $("#tab-receive").click(function() {
         receiveTabLoader();

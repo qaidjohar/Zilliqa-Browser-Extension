@@ -190,11 +190,12 @@
                 <select name="sendFromSelect" id="sendFromSelect" data-mini="true"></select>-->
                 <div id="sendFromSelect"></div>
                 <!--<div id="sendToSelect"></div>-->
-                <div class="text-center">
-                    <input class="sendInput" id="sendToAddress" data-role="none" type="text" placeholder="Address to Send"><br>
-                    <input class="sendInput" id="sendAmount" data-role="none" type="number" placeholder="Amount to Send"><br>
-                    <input class="sendInput" id="sendGasPrice" data-role="none" type="number" placeholder="Gas Price"><br>
-                    <input class="sendInput" id="sendGasLimit" data-role="none" type="number" placeholder="Gas Limit"><br>
+                
+                <div class="text-right">
+                    To: <img id="sendToAddrIdenticon"> <input class="sendInput" id="sendToAddress" data-role="none" type="text" placeholder="Address to Send"><br>
+                    Amount: <input class="sendInput" id="sendAmount" data-role="none" type="number" placeholder="Amount to Send"><br>
+                    Gas Price: <input class="sendInput" id="sendGasPrice" data-role="none" type="number" placeholder="Gas Price"><br>
+                    Gas Limit: <input class="sendInput" id="sendGasLimit" data-role="none" type="number" placeholder="Gas Limit (Default: 1)"><br>
                     <!--<button data-role="none" id="send-cancel">Cancel</button>-->
                     <button id="sendTransaction" data-role="none" id="send-ok">OK</button>
                 </div>
