@@ -52,9 +52,10 @@ function formattedDate(unixTimeStamp) {
 $(function(){
 
     $('#setPass-ok').click(function(){
-        //hideall();
-        loginSetup();
-        //$("#login").show();
+        let seedPhrase = $('#newSeedPhrase').val();
+        let newPassword = $('#newPassword').val();
+        let newConfirmPassword = $('#newConfirmPassword').val();
+        loginSetup(seedPhrase,newPassword,newConfirmPassword);
     });
     
     $('#logout').click(function(){
@@ -67,7 +68,9 @@ $(function(){
     });
     
     $('#login-btn').click(function(){
-        loginAuth();
+        let password =  $('#password').val();
+        $('#password').val('');
+        loginAuth(password);
     });
     
     $('#restore-cancel').click(function(){

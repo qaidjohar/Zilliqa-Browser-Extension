@@ -71,10 +71,10 @@ function emptyInputCheck(word){
     }
 }
 
-function loginSetup(){
-    let seedPhrase = $('#newSeedPhrase').val();
-    let newPassword = $('#newPassword').val();
-    let newConfirmPassword = $('#newConfirmPassword').val();
+function loginSetup(seedPhrase,newPassword,newConfirmPassword){
+    //let seedPhrase = $('#newSeedPhrase').val();
+    //let newPassword = $('#newPassword').val();
+    //let newConfirmPassword = $('#newConfirmPassword').val();
     
     ////console.log(seedPhrase.replace(/\s\s+/g, ' '));
     //Trimming all extra spaces and storing count of words
@@ -84,16 +84,16 @@ function loginSetup(){
     
     if(seedPhraseLen != 12){
        //console.log("Phrase is not of 12 words");
-        return; 
+        return -3; 
     }
     
     if(!emptyInputCheck(newPassword)){
         //console.log("Empty Password");
-        return;
+        return -2;
     }
     if(newPassword != newConfirmPassword){
         //console.log("Password doesn't Match");
-        return;
+        return -1;
     }
     else{
         
@@ -128,6 +128,7 @@ function loginSetup(){
         
         //Create an initial account 
         createInitialAccount(newPassword);
+        return 0;
     }
 }
 
@@ -206,9 +207,9 @@ function logout(){
     $("#login").show();
 }
 
-function loginAuth(){
-    let password =  $('#password').val();
-    $('#password').val('');
+function loginAuth(password){
+    //let password =  $('#password').val();
+    //$('#password').val('');
     let theLoginPassSHA1 = $.sha1(password);
     let theStoredPassSHA1;
     
@@ -225,6 +226,7 @@ function loginAuth(){
 		 if (theStoredPassSHA1 != theLoginPassSHA1) {
 			 //console.log('Wrong Seed Phase. Please try again...');	
              displayErrorPopups("Invalid Password!");
+             return -1;
 		 } else{
 			extLoginKey = password;
             background.extLoginKey = password;
@@ -234,6 +236,7 @@ function loginAuth(){
             getAllDBAccounts();
             loadAccount(background.selectedAccount);
             setTimeout(function(){accountSelector(background.selectedAccount);},100);
+            return 0;
 		 }
      }); // local.get function    
 }
