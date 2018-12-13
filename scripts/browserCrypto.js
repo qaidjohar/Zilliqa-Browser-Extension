@@ -207,27 +207,41 @@ function logout(){
     $("#login").show();
 }
 
+function loginAuthVerify(password,theStoredPassSHA1){
+    let theLoginPassSHA1 = $.sha1(password);
+    if (theStoredPassSHA1 != theLoginPassSHA1) {	
+        return -1;
+    } else {
+        return 0;
+     }
+    
+}
+
 function loginAuth(password){
     //let password =  $('#password').val();
     //$('#password').val('');
-    let theLoginPassSHA1 = $.sha1(password);
-    let theStoredPassSHA1;
     
+    //Retrieve Stored Login Password from chrome database
     chrome.storage.local.get(['extLoginKey'], function(result) {         
-         theStoredPassSHA1 = result.extLoginKey; 
-         
+          
+        
+
          // Case 1: default Key doesn't exists
          if (!result.extLoginKey) {
             hideall();
             $("#setPass").show();
-		 }		
+            return -1;
+		 }	
+         	
+         let theStoredPassSHA1 = result.extLoginKey;
+         let verify = loginAuthVerify(password,theStoredPassSHA1)
 		 
 		 // Case 2: default key exists : ensure it is correct for development testing
-		 if (theStoredPassSHA1 != theLoginPassSHA1) {
+		 if (verify == -1) {
 			 //console.log('Wrong Seed Phase. Please try again...');	
              displayErrorPopups("Invalid Password!");
              return -1;
-		 } else{
+		 } else {
 			extLoginKey = password;
             background.extLoginKey = password;
             background.status = 1;
@@ -241,10 +255,9 @@ function loginAuth(password){
      }); // local.get function    
 }
 
-function showPrivateKey(flag){
+function showPrivateKey(flag,password=0){
     if(flag){
-        let password = $('#prKeyPassInput').val();
-        $('#prKeyPassInput').val('');
+        console.log(extAccountData);
         if(password != extLoginKey){
             $( "#popupShowPrKey" ).popup( "close" );
             setTimeout( function(){ displayErrorPopups("Invalid Password"); }, 500 );

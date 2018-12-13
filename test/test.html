@@ -1,19 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- add mocha css, to show results -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
-  <!-- add mocha framework code -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
-  <script>
+    <!-- add mocha css, to show results -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+    <!-- add mocha framework code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>
     mocha.setup('bdd'); // minimal setup
-  </script>
-  <!-- add chai -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
-  <script>
+    </script>
+    <!-- add chai -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    
+    <script src="../scripts/jquery.min.js" ></script>
+    <script src="../scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="../scripts/ddslick.min.js"></script>
+    <script src="../scripts/jquery.sha1.js" ></script>
+    <script src="../scripts/aes.js" ></script>
+    <script src="../scripts/blockies.js"></script>
+    <script src="../scripts/bip39Mnemonic.js"></script>
+    <script src="../scripts/Laksa.browser.js"></script>
+    <script src="../scripts/browserCrypto.js" ></script>
+    <script src="../scripts/localDB.js" ></script>
+    <script src="../scripts/jquery.qrcode.min.js"></script>
+    
+    <script>
     // chai has a lot of stuff, let's make assert global
     let assert = chai.assert;
-  </script>
+    </script>
 </head>
 
 <body>

@@ -126,7 +126,9 @@ $(function(){
     });
     
     $("#showPrKey").click(function() {
-        showPrivateKey(1);
+        let password = $('#prKeyPassInput').val();
+        $('#prKeyPassInput').val('');
+        showPrivateKey(1,password);
     });
     $("#hidePrKey").click(function() {
         showPrivateKey(0);
