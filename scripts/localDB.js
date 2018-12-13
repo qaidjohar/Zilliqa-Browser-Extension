@@ -16,47 +16,54 @@ function getAccount(index){
           return extAccountData[index];
 }
 
-function importDBAccount(accountName,privateKey){
+function importDBAccount(accountName,privateKey,test=0){
     //Validating Private Key
     try{
-        let account = laksa.wallet.importAccountFromPrivateKey(privateKey);
+        let account = acc.importAccount(privateKey);
         account.privateKey = CryptoJS.AES.encrypt(account.privateKey, extLoginKey);
         extAccountData.push({'address': account.address,'name': accountName,'privateAddress': account.privateKey,'publicAddress': account.publicKey});
-        chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          $('#accountSelect').ddslick('destroy');
-          let index = getAccountIndex(account.address)
-          loadAccount(index);
-          accountSelector(index);
-        });
+        if(test == 0){
+            chrome.storage.local.set({userAccounts: extAccountData}, function() {
+              $('#accountSelect').ddslick('destroy');
+              let index = getAccountIndex(account.address)
+              console.log(index);
+              loadAccount(index);
+              accountSelector(index);
+            });
+        }
     } catch(err){ 
         return '-1'; 
     }    
 }
 
-function createInitialAccount(key){
+function createInitialAccount(key,test=0){
     let accountName = 'First Account'
     let newAccount = laksa.wallet.createAccount();
     newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, key);
     extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
     //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
     //console.log(extAccountData);
-    chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          //console.log('Value is set to ');
-          //console.log(extAccountData);
-    });
+    if(test==0){
+        chrome.storage.local.set({userAccounts: extAccountData}, function() {
+              //console.log('Value is set to ');
+              //console.log(extAccountData);
+        });
+    }
     return newAccount.address;
 }
 
-function createDBAccount(accountName){
+function createDBAccount(accountName,test=0){
     let newAccount = laksa.wallet.createAccount();
     newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);
     extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
     //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
     //console.log(extAccountData);
-    chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          //console.log('Value is set to ');
-          //console.log(extAccountData);
-    });
+    if(test==0){
+        chrome.storage.local.set({userAccounts: extAccountData}, function() {
+              //console.log('Value is set to ');
+              //console.log(extAccountData);
+        });
+    }
     return newAccount.address;
 }
 
@@ -87,12 +94,10 @@ function loadAccount(index){
             let icon = blockies.create({ seed: acDetails.address });
             $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
             $("#homeZilBalance").html("Fetching Balance");
-            laksa.zil.getBalance({ address: acDetails.address }, (err, data) => {
-              if (err) {
+            laksa.zil.getBalance({ address: acDetails.address }).then(data=>{
+                $("#homeZilBalance").html(data.balance+" Zils");
+            }).catch(e=>{
                 $("#homeZilBalance").html("Not Connected !!!");
-              }
-              //console.log(data);
-              $("#homeZilBalance").html(data.balance+" Zils");
             });
             background.selectedAccount = index;
             $("#selectedAccountPrivateKey").html("******************************************************<br>**********");

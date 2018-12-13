@@ -3,6 +3,7 @@
 //const laksa=new Laksa('https://dev-test-api.aws.z7a.xyz/');
 //laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
 const laksa = new Laksa()
+const acc= new laksa.Modules.Account()
 const nodeProvider = new laksa.Modules.HttpProvider('https://api-scilla.zilliqa.com');
 const scillaProvider = new laksa.Modules.HttpProvider('https://scilla-runner.zilliqa.com');
 laksa.setNodeProvider(nodeProvider);
@@ -348,38 +349,42 @@ function initiateTransaction(){
     if(sendTo.length == 0){ displayErrorPopups("Address to Send is Invalid"); return; }
     if(amount.length == 0){ displayErrorPopups("Amount to Send is Invalid"); return; }
     if(gasPrice.length == 0){ displayErrorPopups("Gas Price Invalid"); return; }
-    if(gasLimit.length == 0){ $('#sendGasLimit').val('1'); displayErrorPopups("Gas Limit set to 1"); return; }
+    if(gasLimit.length == 0){ $('#sendGasLimit').val('100'); displayErrorPopups("Gas Limit set to 1"); return; }
     let acDetails = getAccount(background.selectedAccount);
     let decPrivateKey = CryptoJS.AES.decrypt(acDetails.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);
     //console.log(acDetails);
     //console.log(decPrivateKey);
     let account = laksa.wallet.importAccountFromPrivateKey(decPrivateKey);
+    //let account = acc.importAccount(decPrivateKey);
     //console.log(account);
     if(account == false){ setTimeout( function(){ displayErrorPopups("Unable to fetch Private Key..Reload Extension"); }, 100 ); return; }
+
     
-    let transaction = new laksa.Modules.Transaction({
-        version: 0,
-        toAddr: sendTo,
-        amount: laksa.util.toBN(parseInt(amount)),
-        gasPrice: laksa.util.toBN(parseInt(gasPrice)),
-        gasLimit: laksa.util.toBN(parseInt(gasLimit))
+    let transaction = laksa.transactions.new({
+         version: 1, 
+         toAddr: sendTo, 
+         amount: new laksa.util.toBN(parseInt(amount)), 
+         gasPrice: new laksa.util.toBN(parseInt(gasPrice)), 
+         gasLimit: laksa.util.Long.fromNumber(parseInt(gasLimit)) 
     });
-    //console.log(transaction);
-    account.signTransaction(transaction).then(d=>laksa.zil.createTransaction(d)).then(e=>{
-        //console.log(e);
-        $('#sendToAddress').val('');
-        $('#sendAmount').val('');
-        $('#sendGasPrice').val('');
-        $('#sendGasLimit').val('');
-        if(e.TranID != undefined){
-            displaySuccessPopups("Success. TransID: "+e.TranID);
-            let tabUrl = 'https://explorer-scilla.zilliqa.com/transactions/'+e.TranID.toString();
+
+    try { 
+        account.signTransaction(transaction).then(d=>d.sendTransaction()).then(e=>{
+            $('#sendToAddress').val('');
+            $('#sendAmount').val('');
+            $('#sendGasPrice').val('');
+            $('#sendGasLimit').val('');
+            displaySuccessPopups("Success-Opening Browser Tab.");
+            let tabUrl = 'https://viewblock.io/zilliqa/tx/'+e.response.TranID.toString()+'?network=testnet-scilla';
             chrome.tabs.create({url: tabUrl, active: false});
-        } else {
-            displayErrorPopups("Error: "+e.Error);
-        }
-        return;
-    });
+        }).catch(err=>{ 
+            //displayErrorPopups(""+err);
+            displayErrorPopups("Invalid Transaction Request.");
+        });
+    } 
+    catch(err){ 
+        console.log("error"); 
+    }
 }
 
 function receiveTabLoader(){
