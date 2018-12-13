@@ -1,14 +1,3 @@
-describe('Array', function() {
-  // Within our Array group, Create a group of tests for indexOf
-  describe('#indexOf()', function() {
-    // A string explanation of what we're testing
-    it('should return -1 when the value is not present', function(){
-      // Our actual test: -1 should equal indexOf(...)
-      assert.equal(1, [1,2,3].indexOf(4));
-    });
-  });
-});
-
 describe('Login Setup',function(){
     it('Seed phrase is not of 12 words', function(){
         assert.equal(-3,loginSetup('demand book maid age pen boring cluster city expect about habit skull chunk interest','testing','testing'));
@@ -29,6 +18,41 @@ describe('LoginAuthentication',function(){
         assert.equal(0,loginAuthVerify('testing','dc724af18fbdd4e59189f5fe768a5f8311527050'));
     });
 });
+
+describe('Import Account',function(){
+    it('should return -1 on import account failure', function(){
+        assert.equal(-1,importDBAccount('TestAccount','05ab75e592752af0df5bc92c94ca8ce55d4da5ffbe0a9110ddef1fc',1));
+    });
+    it('should return 0 on import account success', function(){
+        assert.equal(0,importDBAccount('TestAccount','05ab75e592752af0df5bc92c94ca8ce55d4da5ffbe0a9110ddef1fcb3ac2f8db',1));
+    });
+});
+
+describe('Create Initial Account',function(){
+    it('should return Address on create initial account Success', function(){
+        assert.notEqual(-1,createInitialAccount(extLoginKey,1));
+    });
+});
+
+describe('Create Account',function(){
+    it('should return Address on create account Success', function(){
+        assert.notEqual(-1,createDBAccount('Test',1));
+    });
+});
+
+createDBAccount('Test2',1);
+
+describe('Delete Account',function(){
+    it('should return -1 if deleted index is not found', function(){
+        assert.equal(-1,deleteDBAccount(-1,test=0));
+    });
+    it('should return 0 if index to be deleted is Found', function(){
+        assert.equal(-1,deleteDBAccount(1,test=0));
+    });
+});
+
+
+
 
 
 

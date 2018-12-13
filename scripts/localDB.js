@@ -31,55 +31,75 @@ function importDBAccount(accountName,privateKey,test=0){
               accountSelector(index);
             });
         }
+        return 0
     } catch(err){ 
-        return '-1'; 
+        console.log(err);
+        return -1; 
     }    
 }
 
 function createInitialAccount(key,test=0){
-    let accountName = 'First Account'
-    let newAccount = laksa.wallet.createAccount();
-    newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, key);
-    extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
-    //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
-    //console.log(extAccountData);
-    if(test==0){
-        chrome.storage.local.set({userAccounts: extAccountData}, function() {
-              //console.log('Value is set to ');
-              //console.log(extAccountData);
-        });
-    }
-    return newAccount.address;
+    try{
+        let accountName = 'First Account'
+        let newAccount = laksa.wallet.createAccount();
+        newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, key);
+        extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
+        //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
+        //console.log(extAccountData);
+        if(test==0){
+            chrome.storage.local.set({userAccounts: extAccountData}, function() {
+                  //console.log('Value is set to ');
+                  //console.log(extAccountData);
+            });
+        }
+        return newAccount.address;
+    } catch(err){ 
+        //console.log(err);
+        return -1; 
+    }   
 }
 
 function createDBAccount(accountName,test=0){
-    let newAccount = laksa.wallet.createAccount();
-    newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);
-    extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
-    //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
-    //console.log(extAccountData);
-    if(test==0){
-        chrome.storage.local.set({userAccounts: extAccountData}, function() {
-              //console.log('Value is set to ');
-              //console.log(extAccountData);
-        });
+    try {
+        let newAccount = laksa.wallet.createAccount();
+        newAccount.privateKey = CryptoJS.AES.encrypt(newAccount.privateKey, extLoginKey);
+        extAccountData.push({'address': newAccount.address,'name': accountName,'privateAddress': newAccount.privateKey,'publicAddress': newAccount.publicKey});      
+        //console.log(accountName+'  '+newAccount.address+'  '+newAccount.publicKey+'  '+newAccount.privateKey);
+        //console.log(extAccountData);
+        if(test==0){
+            chrome.storage.local.set({userAccounts: extAccountData}, function() {
+                  //console.log('Value is set to ');
+                  //console.log(extAccountData);
+            });
+        }
+        return newAccount.address;
+    } catch(err){ 
+        //console.log(err);
+        return -1; 
     }
-    return newAccount.address;
 }
 
-function deleteDBAccount(index){
-    if (index > -1) {
-      extAccountData.splice(index, 1);
-      //console.log(index);
+function deleteDBAccount(index,test=0){
+    try {
+        if (index > -1) {
+          extAccountData.splice(index, 1);
+          //console.log(index);
+        }
+        else{
+            return -1;
+            //console.log("No such index");
+        }
+        //console.log(extAccountData);
+        if(test==0){
+            chrome.storage.local.set({userAccounts: extAccountData}, function() {
+                  //console.log('Value is set to ');
+                  //console.log(extAccountData);
+            });
+        }
+        return 0;
+    } catch(err){
+        return -1;
     }
-    else{
-        //console.log("No such index");
-    }
-    //console.log(extAccountData);
-    chrome.storage.local.set({userAccounts: extAccountData}, function() {
-          //console.log('Value is set to ');
-          //console.log(extAccountData);
-    });
 }
 
 function loadAccount(index){

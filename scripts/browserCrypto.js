@@ -213,6 +213,7 @@ function loginAuthVerify(password,theStoredPassSHA1){
     if (theStoredPassSHA1 != theLoginPassSHA1) {	
         return -1;
     } else {
+        extLoginKey = password;
         return 0;
      }
     
@@ -262,7 +263,7 @@ function showPrivateKey(flag,password=0){
         if(password != extLoginKey){
             $( "#popupShowPrKey" ).popup( "close" );
             setTimeout( function(){ displayErrorPopups("Invalid Password"); }, 500 );
-            return;
+            return -1;
         }
         let acDetails = getAccount(background.selectedAccount);
         let decPrivateKey = CryptoJS.AES.decrypt(acDetails.privateAddress, password).toString(CryptoJS.enc.Utf8);
@@ -270,6 +271,7 @@ function showPrivateKey(flag,password=0){
         $( "#popupShowPrKey" ).popup( "close" );
         $("#hidePrKey").show();
         $("#showPrKeyPopup").hide();
+        return 0;
     } else {
         $("#selectedAccountPrivateKey").html("******************************************************<br>**********");
         $("#hidePrKey").hide();
