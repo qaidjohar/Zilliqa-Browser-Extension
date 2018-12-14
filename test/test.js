@@ -51,13 +51,21 @@ describe('Delete Account',function(){
     });
 });
 
-console.log(extAccountData);
+//console.log(extAccountData);
 
-describe('Load Home Screen Data',function(){
+/*describe('Load Home Screen Data',function(){
     it('should return 0 if all components on the screen are loaded', function(){
         assert.equal(0,loadAccount(0,1));
     });
     
+});*/
+
+
+describe('Load Home Screen Data', () => {
+  it('should return 0 if all components on the screen are loaded', async () => {
+    const p = await loadAccount(0,1)
+    expect(p).to.equal(0);
+  });
 });
 
 
