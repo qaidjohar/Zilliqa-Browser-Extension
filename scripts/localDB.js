@@ -102,6 +102,16 @@ function deleteDBAccount(index,test=0){
     }
 }
 
+function retrBalance(address){
+    laksa.zil.getBalance({ address: address }).then(data=>{
+        $("#homeZilBalance").html(data.balance+" Zils");
+        return data.balance;
+    }).catch(e=>{
+        $("#homeZilBalance").html("Not Connected !!!");
+        return -1;
+    });
+}
+
 function loadingAccountDetails(index,test=0){
     let acDetails = getAccount(index);
     if(acDetails != undefined){
@@ -118,12 +128,7 @@ function loadingAccountDetails(index,test=0){
         $("#selectedAccountPublicKey").html(acDetails.publicAddress);
         $("#hidePrKey").hide();
         $("#showPrKeyPopup").show();
-        laksa.zil.getBalance({ address: acDetails.address }).then(data=>{
-            $("#homeZilBalance").html(data.balance+" Zils");
-        }).catch(e=>{
-            $("#homeZilBalance").html("Not Connected !!!");
-            return -2;
-        });
+        retrBalance(acDetails.address);
         //console.log('acDetails');
         //console.log(acDetails);
         console.log(acDetails);
