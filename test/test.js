@@ -63,7 +63,7 @@ describe('Delete Account',function(){
 
 describe('Load Home Screen Data', () => {
   it('should return 0 if all components on the screen are loaded', async () => {
-    const p = await loadAccount(0,1)
+    const p = await loadingAccountDetails(0,1)
     expect(p).to.equal(0);
   });
 });
