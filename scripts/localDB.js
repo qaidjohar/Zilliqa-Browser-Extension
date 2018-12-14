@@ -134,6 +134,9 @@ function loadingAccountDetails(index,test=0){
         console.log(acDetails);
         return 0;
     }
+    else{
+        return -1;
+    }
 }
 
 function loadAccount(index,test=0){

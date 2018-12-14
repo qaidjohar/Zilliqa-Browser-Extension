@@ -53,18 +53,24 @@ describe('Delete Account',function(){
 
 //console.log(extAccountData);
 
-describe('Load Home Screen Data',function(){
-    it('should return 0 if all components on the screen are loaded', function(){
-        assert.equal(0,loadingAccountDetails(0,1));
-    });
-    
-});
-
-
 describe('Load Home Screen Data', () => {
   it('should return 0 if all components on the screen are loaded', async () => {
     const p = await loadingAccountDetails(0,1)
     expect(p).to.equal(0);
+  });
+  
+  it('should return -1 if account address is invalid', async () => {
+    const p = await loadingAccountDetails(5,1)
+    expect(p).to.equal(-1);
+  });
+  
+});
+
+
+describe('Get Balance', () => {
+  it('should return 0 if all components on the screen are loaded', async () => {
+    const p = await laksa.zil.getBalance({ address: 'a74f3660086f2ab75e7ef94161321666e26d09c2' })
+    expect(p.balance).to.equal('0');
   });
 });
 
