@@ -33,7 +33,7 @@ function importDBAccount(accountName,privateKey,test=0){
         }
         return 0
     } catch(err){ 
-        console.log(err);
+        //console.log(err);
         return -1; 
     }    
 }
@@ -102,33 +102,40 @@ function deleteDBAccount(index,test=0){
     }
 }
 
-function loadAccount(index){
-    let timer = setInterval(function(){
-        let acDetails = getAccount(index);
-        if(acDetails != undefined){
-            $("#homeAccName").html(acDetails.name);
-
-            $("#homeAddress").html(acDetails.address);
-            $("#homeAddress").append('<svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1.4em" width="1.4em" viewBox="0 0 40 40" style="vertical-align:middle;cursor:pointer"><g><path d="m30 35h-25v-22.5h25v7.5h2.5v-12.5c0-1.4-1.1-2.5-2.5-2.5h-7.5c0-2.8-2.2-5-5-5s-5 2.2-5 5h-7.5c-1.4 0-2.5 1.1-2.5 2.5v27.5c0 1.4 1.1 2.5 2.5 2.5h25c1.4 0 2.5-1.1 2.5-2.5v-5h-2.5v5z m-20-27.5h2.5s2.5-1.1 2.5-2.5 1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5 1.3 2.5 2.5 2.5h2.5s2.5 1.1 2.5 2.5h-20c0-1.5 1.1-2.5 2.5-2.5z m-2.5 20h5v-2.5h-5v2.5z m17.5-5v-5l-10 7.5 10 7.5v-5h12.5v-5h-12.5z m-17.5 10h7.5v-2.5h-7.5v2.5z m12.5-17.5h-12.5v2.5h12.5v-2.5z m-7.5 5h-5v2.5h5v-2.5z"></path></g></svg>');
-            
-            let icon = blockies.create({ seed: acDetails.address });
-            $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
-            $("#homeZilBalance").html("Fetching Balance");
-            laksa.zil.getBalance({ address: acDetails.address }).then(data=>{
-                $("#homeZilBalance").html(data.balance+" Zils");
-            }).catch(e=>{
-                $("#homeZilBalance").html("Not Connected !!!");
-            });
-            background.selectedAccount = index;
-            $("#selectedAccountPrivateKey").html("******************************************************<br>**********");
-            $("#selectedAccountPublicKey").html(acDetails.publicAddress);
-            $("#hidePrKey").hide();
-            $("#showPrKeyPopup").show();
-            //console.log('acDetails');
-            //console.log(acDetails);
-            window.clearInterval(timer);
-        }
-    }, 100);
+function loadAccount(index,test=0){
+    try{
+        let timer = setInterval(function(){
+            let acDetails = getAccount(index);
+            if(acDetails != undefined){
+                $("#homeAccName").html(acDetails.name);
+                $("#homeAddress").html(acDetails.address);
+                $("#homeAddress").append('<svg fill="currentColor" preserveAspectRatio="xMidYMid meet" height="1.4em" width="1.4em" viewBox="0 0 40 40" style="vertical-align:middle;cursor:pointer"><g><path d="m30 35h-25v-22.5h25v7.5h2.5v-12.5c0-1.4-1.1-2.5-2.5-2.5h-7.5c0-2.8-2.2-5-5-5s-5 2.2-5 5h-7.5c-1.4 0-2.5 1.1-2.5 2.5v27.5c0 1.4 1.1 2.5 2.5 2.5h25c1.4 0 2.5-1.1 2.5-2.5v-5h-2.5v5z m-20-27.5h2.5s2.5-1.1 2.5-2.5 1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5 1.3 2.5 2.5 2.5h2.5s2.5 1.1 2.5 2.5h-20c0-1.5 1.1-2.5 2.5-2.5z m-2.5 20h5v-2.5h-5v2.5z m17.5-5v-5l-10 7.5 10 7.5v-5h12.5v-5h-12.5z m-17.5 10h7.5v-2.5h-7.5v2.5z m12.5-17.5h-12.5v2.5h12.5v-2.5z m-7.5 5h-5v2.5h5v-2.5z"></path></g></svg>');
+                let icon = blockies.create({ seed: acDetails.address });
+                $("#homeAccIdenticon").html("<img src='"+icon.toDataURL()+"' />");
+                $("#homeZilBalance").html("Fetching Balance");
+                if(test==0){
+                    background.selectedAccount = index;
+                }
+                $("#selectedAccountPrivateKey").html("******************************************************<br>**********");
+                $("#selectedAccountPublicKey").html(acDetails.publicAddress);
+                $("#hidePrKey").hide();
+                $("#showPrKeyPopup").show();
+                laksa.zil.getBalance({ address: acDetails.address }).then(data=>{
+                    $("#homeZilBalance").html(data.balance+" Zils");
+                }).catch(e=>{
+                    $("#homeZilBalance").html("Not Connected !!!");
+                    return -2;
+                });
+                //console.log('acDetails');
+                //console.log(acDetails);
+                window.clearInterval(timer);
+                console.log(acDetails);
+                return 0;
+            }
+        }, 100);
+    } catch(err){
+        return -1;
+    }
 }
 
 function getAccountIndex(accAddress){

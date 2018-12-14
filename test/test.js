@@ -44,11 +44,20 @@ createDBAccount('Test2',1);
 
 describe('Delete Account',function(){
     it('should return -1 if deleted index is not found', function(){
-        assert.equal(-1,deleteDBAccount(-1,test=0));
+        assert.equal(-1,deleteDBAccount(-1,1));
     });
     it('should return 0 if index to be deleted is Found', function(){
-        assert.equal(-1,deleteDBAccount(1,test=0));
+        assert.equal(0,deleteDBAccount(0,1));
     });
+});
+
+console.log(extAccountData);
+
+describe('Load Home Screen Data',function(){
+    it('should return 0 if all components on the screen are loaded', function(){
+        assert.equal(0,loadAccount(0,1));
+    });
+    
 });
 
 
