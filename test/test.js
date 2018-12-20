@@ -66,6 +66,32 @@ describe('Load Home Screen Data', () => {
   
 });
 
+let transaction = laksa.transactions.new({
+     version: 0, 
+     toAddr: '2105d34aa4cbc67b40e649d4aad7d237d717668c', 
+     amount: new laksa.util.toBN(100), 
+     gasPrice: new laksa.util.toBN(100), 
+     gasLimit: laksa.util.Long.fromNumber(100) 
+});
+
+
+describe('Send Transaction Zil', () => {
+  //Use private key with atleast 300 Zil any balance
+  it('should return 0 if transaction is successful.', async () => {
+    let account_1 = laksa.wallet.importAccountFromPrivateKey('05ab75e592752af0df5bc92c94ca8ce55d4da5ffbe0a9110ddef1fcb3ac2f8db');
+    const a1 = await account_1.signTransaction(transaction).then(signed => signed.sendTransaction()).then(return 0;).catch(return -1;);
+    expect(a1).to.equal(0);
+  });
+  
+  it('should return -1 if transaction failed', async () => {
+    //Use private key without any balance
+    let account_2 = laksa.wallet.importAccountFromPrivateKey('ee70f971dee477eeb7342e1d4654f7fbec2bd1b42ad4065a3a9aada96ece1f18');
+    const a2 = await account_2.signTransaction(transaction).then(signed => signed.sendTransaction()).then(return 0;).catch(return -1;);
+    expect(a2).to.equal(-1);
+  });
+  
+});
+
 
 describe('Get Balance', () => {
   it('should return 0 if all components on the screen are loaded', async () => {

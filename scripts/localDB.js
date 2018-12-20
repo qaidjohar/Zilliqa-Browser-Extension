@@ -131,7 +131,6 @@ function loadingAccountDetails(index,test=0){
         retrBalance(acDetails.address);
         //console.log('acDetails');
         //console.log(acDetails);
-        console.log(acDetails);
         return 0;
     }
     else{

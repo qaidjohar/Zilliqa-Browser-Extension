@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Green Wallet",
-    "version": "0.3.2",
+    "version": "0.3.4",
     "description": "The extension provides user interface to work with Zilliqa TestNet",
     "icons": {
         "128": "icon128.png",
