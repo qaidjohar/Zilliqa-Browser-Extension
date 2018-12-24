@@ -4,7 +4,7 @@
 //laksa.setProvider("https://dev-test-api.aws.z7a.xyz/");
 const laksa = new Laksa()
 const acc= new laksa.Modules.Account()
-const nodeProvider = new laksa.Modules.HttpProvider('https://api-scilla.zilliqa.com');
+const nodeProvider = new laksa.Modules.HttpProvider('https://api.zilliqa.com');
 const scillaProvider = new laksa.Modules.HttpProvider('https://scilla-runner.zilliqa.com');
 laksa.setNodeProvider(nodeProvider);
 laksa.setScillaProvider(scillaProvider);
