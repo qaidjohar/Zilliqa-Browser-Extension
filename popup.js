@@ -2,8 +2,8 @@
 Old Testnets
 dev-test-api: https://dev-test-api.aws.z7a.xyz
 dev-test-explorer: https://dev-test-explorer.aws.z7a.xyz
-* 
-* 
+*
+*
 New Testnets - Tested on Zilliqa-js-monorepo
 * https://api-scilla.zilliqa.com/
 * https://explorer-scilla.zilliqa.com/
@@ -57,31 +57,31 @@ $(function(){
         let newConfirmPassword = $('#newConfirmPassword').val();
         loginSetup(seedPhrase,newPassword,newConfirmPassword);
     });
-    
+
     $('#logout').click(function(){
         logout();
     });
-    
+
     $('#login-seed').click(function(){
         hideall();
         $("#restore").show();
     });
-    
+
     $('#login-btn').click(function(){
         let password =  $('#password').val();
         $('#password').val('');
         loginAuth(password);
     });
-    
+
     $('#restore-cancel').click(function(){
         hideall();
         $("#login").show();
     });
-    
+
     $('#restore-ok').click(function(){
         resetExtPassword();
-    });  
-      
+    });
+
     $('#createAccountBack').click(function(){
         readAllAccounts()
         hideall();
@@ -90,41 +90,41 @@ $(function(){
     $('#homeAddress').click(function(){
         copyToClipboard('#homeAddress');
     });
-      
+
     $('#zil-stats').click(function(){
-       zilStats();        
+       zilStats();
     });
-    
+
     $('#create-account').click(function(){
         hideall();
         $("#createAccount").show();
     });
-    
+
     $('#createAccountOk').click(function(){
         createAccount();
     });
-    
+
     $('#import-account').click(function(){
         hideall();
         $("#importAccount").show();
     });
-    
+
     $('#importAccountOk').click(function(){
         importAccount();
         hideall();
         $("#home").show();
     });
-    
+
     $('#importAccountBack').click(function(){
         hideall();
         $("#home").show();
     });
-    
+
     $(document).on("click","#accBtn",function(btn){
         loadZilAccount(btn.target.name);
-        
+
     });
-    
+
     $("#showPrKey").click(function() {
         let password = $('#prKeyPassInput').val();
         $('#prKeyPassInput').val('');
@@ -142,28 +142,28 @@ $(function(){
     $("#createAccountBtn").click(function() {
         createAccount();
     });
-    
-    
-    
+
+
+
     $("#tab-sending").click(function() {
         sendTabLoader();
     });
     $("#sendTransaction").click(function() {
         initiateTransaction();
     });
-    $('#sendToAddress').change(function () { 
+    $('#sendToAddress').change(function () {
         sendtoaddrIdenticon();
     });
-            
+
     $("#tab-receive").click(function() {
         receiveTabLoader();
     });
-    
+
     $("#receive-addrDisp").click(function() {
         copyToClipboard('#receive-addrDisp');
     });
     $("#accbtnTry").click(function() {
         $('#accountSelect').ddslick('select', {index: '0'});
     });
-            
+
 });

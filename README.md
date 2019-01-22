@@ -1,8 +1,8 @@
 # Zilliqa Browser-Extension
 
-Zilliqa Browser Extension is a chrome based web browser extension which provides an interface to the users to communicate with the Zilliqa Blockchain. 
+Zilliqa Browser Extension is a chrome based web browser extension which provides an interface to the users to communicate with the Zilliqa Blockchain.
 
-This Project is under development, funded by [Zilliqa Ecosystem-Grant Program](https://blog.zilliqa.com/announcing-the-first-zilliqa-ecosystem-grant-awardees-4ccb39ef83c9). 
+This Project is under development, funded by [Zilliqa Ecosystem-Grant Program](https://blog.zilliqa.com/announcing-the-first-zilliqa-ecosystem-grant-awardees-4ccb39ef83c9).
 
 
 ## Features Completed
@@ -23,6 +23,7 @@ The following are the features and functionalities of the extension.
 13. Receive Balance using QR Code
 14. Live Zilliqa Market Statistics
 15. OnClick Copy address to Clipboard
+16. Test Suites Added
 
 
 ## Zilliqa Test-Net Details
@@ -51,23 +52,21 @@ Done...Zilliqa Browser Extension Loaded Successfully.
 
 ### User Password Setup and Seed Phrase Generation
 ![User Setup](docs/screenshots/1.png "User Setup")
-    
+
 ### User Login Screen
 
 ![User Login Screen](docs/screenshots/2.png "User Login")
-    
+
 ### Home Screen
 
 ![Home](docs/screenshots/3.png "Accounts Home")
-    
+
 ### Send Amount - Perfrom Transaction
 ![Accounts Details](docs/screenshots/7.png)
-        
+
 ### Receive Amount using QR Code
 ![Receive](docs/screenshots/8.png)
 
 ### Stats: Provides updated statictical information about Zils.
 
 ![Stats](docs/screenshots/9.png)
-    
-    
