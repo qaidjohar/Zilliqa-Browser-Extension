@@ -104,8 +104,9 @@ function deleteDBAccount(index,test=0){
 
 function retrBalance(address){
     laksa.zil.getBalance({ address: address }).then(data=>{
-        $("#homeZilBalance").html(data.balance+" Zils");
-        return data.balance;
+		let bal = laksa.util.Unit.Qa(data.balance).toZil()
+        $("#homeZilBalance").html(bal+" Zils");
+        return bal;
     }).catch(e=>{
         $("#homeZilBalance").html("Not Connected !!!");
         return -1;
