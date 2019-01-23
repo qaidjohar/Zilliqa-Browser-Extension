@@ -345,24 +345,37 @@ function sendtoaddrIdenticon(){
 function sendTransactionZil(privateKey,sendTo,amount,gasPrice,gasLimit){
     try { 
         let transaction = laksa.transactions.new({
-             version: 1, 
+             version: laksa.messenger.setTransactionVersion(1),
              toAddr: sendTo, 
-             amount: new laksa.util.toBN(parseInt(amount)), 
-             gasPrice: new laksa.util.toBN(parseInt(gasPrice)), 
-             gasLimit: laksa.util.Long.fromNumber(parseInt(gasLimit)) 
+             amount: laksa.util.Unit.Zil(amount).toQa(), 	//new laksa.util.toBN(parseInt(amount)), 
+             gasPrice: laksa.util.Unit.Zil(gasPrice).toQa(), 	//new laksa.util.toBN(parseInt(gasPrice)), 
+             gasLimit: laksa.util.Long.fromNumber(parseInt(gasLimit))
         });
+        
+        //console.log((laksa.util.Unit.Zil(amount).toQa()).toString());
+        //console.log((laksa.util.Unit.Zil(gasPrice).toQa()).toString());
+        //console.log((laksa.util.Long.fromNumber(parseInt(gasLimit))).toString());
         
         let account = laksa.wallet.importAccountFromPrivateKey(privateKey);
         //let account = acc.importAccount(privateKey);
         //console.log(account);
         if(account == false){ setTimeout( function(){ displayErrorPopups("Unable to fetch Private Key..Reload Extension"); }, 100 ); return; }
+        
+        /*account.
+        .signTransaction(transaction)
+        .then(signed => signed.sendTransaction())
+        .then(res =>{ 
+			console.log(res.response.TranID); 
+			//return res.transaction.confirm(res.response.TranID);
+		}) */
         account.signTransaction(transaction).then(d=>d.sendTransaction()).then(e=>{
             $('#sendToAddress').val('');
             $('#sendAmount').val('');
             $('#sendGasPrice').val('');
             $('#sendGasLimit').val('');
             displaySuccessPopups("Success-Opening Browser Tab.");
-            let tabUrl = 'https://viewblock.io/zilliqa/tx/'+e.response.TranID.toString()+'?network=testnet-scilla';
+            //let tabUrl = 'https://viewblock.io/zilliqa/tx/'+e.response.TranID.toString()+'?network=testnet-scilla';
+            let tabUrl = 'https://viewblock.io/zilliqa/tx/'+e.response.TranID.toString();
             chrome.tabs.create({url: tabUrl, active: false});
             return 0;
         }).catch(err=>{ 
@@ -387,7 +400,8 @@ function initiateTransaction(){
     if(sendTo.length == 0){ displayErrorPopups("Address to Send is Invalid"); return; }
     if(amount.length == 0){ displayErrorPopups("Amount to Send is Invalid"); return; }
     if(gasPrice.length == 0){ displayErrorPopups("Gas Price Invalid"); return; }
-    if(gasLimit.length == 0){ $('#sendGasLimit').val('100'); displayErrorPopups("Gas Limit set to 100"); return; }
+    if(parseFloat($('#sendGasPrice').val()) < 0.001){ displayErrorPopups("Minimum Gas Price is 0.001 Zils"); return; }
+    if(gasLimit.length == 0){ $('#sendGasLimit').val('1'); displayErrorPopups("Gas Limit set to 1 Qa"); return; }
     let acDetails = getAccount(background.selectedAccount);
     let decPrivateKey = CryptoJS.AES.decrypt(acDetails.privateAddress, extLoginKey).toString(CryptoJS.enc.Utf8);
     //console.log(acDetails);
